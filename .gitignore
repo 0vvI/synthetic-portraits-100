@@ -1,0 +1,4 @@
+portraits/
+__pycache__/
+.DS_Store
+labels/design_v0.csv

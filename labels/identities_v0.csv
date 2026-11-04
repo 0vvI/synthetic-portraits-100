@@ -1,0 +1,101 @@
+id,mst_tone_intended,skin_words,age_bin,age_intended,gender_presentation,region_descriptor,pigment_feature,hair,facial_hair,seed,status
+ID001,1,"very light, pale skin",18-29,22,woman,Eastern European,freckles across the nose and cheeks,hair pulled back tightly,none,20260919,generated
+ID002,1,"very light, pale skin",18-29,23,man,East Asian,none,hair tied back,none,20260920,generated
+ID003,1,"very light, pale skin",30-44,38,woman,East Asian,scattered moles,short cropped hair,none,20260921,generated
+ID004,1,"very light, pale skin",30-44,35,man,Eastern European,none,hair pulled back tightly,light stubble,20260922,generated
+ID005,1,"very light, pale skin",45-59,57,woman,mixed heritage,none,shaved head,none,20260923,generated
+ID006,1,"very light, pale skin",45-59,55,man,mixed heritage,a few solar lentigines on the cheeks and temples,hair pulled back tightly,light stubble,20260924,generated
+ID007,1,"very light, pale skin",60-74,62,woman,Northern European,none,short hair,none,20260925,generated
+ID008,1,"very light, pale skin",60-74,64,man,Northern European,none,shaved head,none,20260926,generated
+ID009,1,"very light, pale skin",75+,79,woman,Northern European,none,hair pulled back tightly,none,20260927,generated
+ID010,1,"very light, pale skin",75+,77,man,Northern European,none,hair tied back,light stubble,20260928,generated
+ID011,2,light skin,18-29,29,woman,Northern European,none,short cropped hair,none,20260929,generated
+ID012,2,light skin,18-29,27,man,East Asian,none,shaved head,none,20260930,generated
+ID013,2,light skin,30-44,41,woman,mixed heritage,none,hair tied back,none,20260931,generated
+ID014,2,light skin,30-44,30,man,Southern European,none,short hair,none,20260932,generated
+ID015,2,light skin,45-59,57,woman,mixed heritage,scattered moles,short cropped hair,none,20260933,generated
+ID016,2,light skin,45-59,51,man,East Asian,none,shaved head,none,20260934,generated
+ID017,2,light skin,60-74,70,woman,mixed heritage,freckles across the nose and cheeks,short cropped hair,none,20260935,generated
+ID018,2,light skin,60-74,68,man,East Asian,freckles across the nose and cheeks,hair tied back,none,20260936,generated
+ID019,2,light skin,75+,84,woman,Southern European,none,hair pulled back tightly,none,20260937,generated
+ID020,2,light skin,75+,84,man,East Asian,none,hair tied back,short trimmed beard,20260938,generated
+ID021,3,light skin with warm undertone,18-29,29,woman,East Asian,none,hair tied back,none,20260939,generated
+ID022,3,light skin with warm undertone,18-29,23,man,Southeast Asian,none,hair tied back,short trimmed beard,20260940,generated
+ID023,3,light skin with warm undertone,30-44,41,woman,mixed heritage,none,hair tied back,none,20260941,generated
+ID024,3,light skin with warm undertone,30-44,31,man,Southern European,none,short hair,none,20260942,generated
+ID025,3,light skin with warm undertone,45-59,59,woman,Middle Eastern,a few solar lentigines on the cheeks and temples,hair pulled back tightly,none,20260943,generated
+ID026,3,light skin with warm undertone,45-59,58,man,Latin American,none,short cropped hair,none,20260944,generated
+ID027,3,light skin with warm undertone,60-74,60,woman,East Asian,none,short cropped hair,none,20260945,generated
+ID028,3,light skin with warm undertone,60-74,72,man,East Asian,scattered moles,hair pulled back tightly,none,20260946,generated
+ID029,3,light skin with warm undertone,75+,78,woman,Southern European,none,short cropped hair,none,20260947,generated
+ID030,3,light skin with warm undertone,75+,80,man,Southeast Asian,none,shaved head,none,20260948,generated
+ID031,4,light-medium skin,18-29,27,woman,Southeast Asian,none,hair tied back,none,20260949,generated
+ID032,4,light-medium skin,18-29,19,man,Southeast Asian,scattered moles,short hair,light stubble,20260950,generated
+ID033,4,light-medium skin,30-44,40,woman,Southeast Asian,none,short cropped hair,none,20260951,generated
+ID034,4,light-medium skin,30-44,34,man,mixed heritage,none,hair tied back,none,20260952,generated
+ID035,4,light-medium skin,45-59,59,woman,Middle Eastern,scattered moles,short hair,none,20260953,generated
+ID036,4,light-medium skin,45-59,55,man,Middle Eastern,a few solar lentigines on the cheeks and temples,shaved head,short trimmed beard,20260954,generated
+ID037,4,light-medium skin,60-74,68,woman,Central Asian,none,hair tied back,none,20260955,generated
+ID038,4,light-medium skin,60-74,71,man,Southern European,none,hair tied back,moustache,20260956,generated
+ID039,4,light-medium skin,75+,83,woman,Central Asian,none,hair tied back,none,20260957,generated
+ID040,4,light-medium skin,75+,77,man,Central Asian,freckles across the nose and cheeks,shaved head,none,20260958,generated
+ID041,5,medium skin,18-29,27,woman,Middle Eastern,none,hair tied back,none,20260959,generated
+ID042,5,medium skin,18-29,28,man,mixed heritage,scattered moles,short hair,none,20260960,generated
+ID043,5,medium skin,30-44,43,woman,Latin American,none,hair tied back,none,20260961,generated
+ID044,5,medium skin,30-44,35,man,South Asian,none,hair pulled back tightly,moustache,20260962,generated
+ID045,5,medium skin,45-59,52,woman,South Asian,none,short hair,none,20260963,generated
+ID046,5,medium skin,45-59,49,man,Southeast Asian,none,shaved head,none,20260964,generated
+ID047,5,medium skin,60-74,70,woman,Latin American,none,hair pulled back tightly,none,20260965,generated
+ID048,5,medium skin,60-74,70,man,mixed heritage,none,short hair,none,20260966,generated
+ID049,5,medium skin,75+,77,woman,Middle Eastern,none,hair pulled back tightly,none,20260967,generated
+ID050,5,medium skin,75+,84,man,Southeast Asian,a few solar lentigines on the cheeks and temples,hair tied back,moustache,20260968,generated
+ID051,6,medium-tan skin,18-29,20,woman,North African,none,hair tied back,none,20260969,generated
+ID052,6,medium-tan skin,18-29,29,man,Southeast Asian,a few post-inflammatory dark marks on the cheeks,shaved head,none,20260970,generated
+ID053,6,medium-tan skin,30-44,33,woman,Pacific Islander,none,hair tied back,none,20260971,generated
+ID054,6,medium-tan skin,30-44,42,man,mixed heritage,none,short cropped hair,none,20260972,generated
+ID055,6,medium-tan skin,45-59,52,woman,North African,mild melasma on the cheeks,short cropped hair,none,20260973,generated
+ID056,6,medium-tan skin,45-59,47,man,North African,none,shaved head,none,20260974,generated
+ID057,6,medium-tan skin,60-74,69,woman,Latin American,none,hair pulled back tightly,none,20260975,generated
+ID058,6,medium-tan skin,60-74,64,man,mixed heritage,a few post-inflammatory dark marks on the cheeks,hair pulled back tightly,moustache,20260976,generated
+ID059,6,medium-tan skin,75+,82,woman,Southeast Asian,none,hair pulled back tightly,none,20260977,generated
+ID060,6,medium-tan skin,75+,80,man,North African,a few post-inflammatory dark marks on the cheeks,short hair,light stubble,20260978,generated
+ID061,7,tan-brown skin,18-29,26,woman,Pacific Islander,scattered moles,hair tied back,none,20260979,generated
+ID062,7,tan-brown skin,18-29,29,man,Pacific Islander,none,short cropped hair,none,20260980,generated
+ID063,7,tan-brown skin,30-44,36,woman,Sub-Saharan African,none,hair tied back,none,20260981,generated
+ID064,7,tan-brown skin,30-44,32,man,Pacific Islander,none,short hair,none,20260982,generated
+ID065,7,tan-brown skin,45-59,57,woman,South Asian,mild melasma on the cheeks,hair tied back,none,20260983,generated
+ID066,7,tan-brown skin,45-59,49,man,South Asian,a few post-inflammatory dark marks on the cheeks,short cropped hair,none,20260984,generated
+ID067,7,tan-brown skin,60-74,62,woman,Latin American,none,hair tied back,none,20260985,generated
+ID068,7,tan-brown skin,60-74,68,man,Sub-Saharan African,none,hair tied back,none,20260986,generated
+ID069,7,tan-brown skin,75+,83,woman,Sub-Saharan African,none,hair tied back,none,20260987,generated
+ID070,7,tan-brown skin,75+,87,man,Pacific Islander,scattered moles,shaved head,none,20260988,generated
+ID071,8,brown skin,18-29,22,woman,Sub-Saharan African,a few post-inflammatory dark marks on the cheeks,short hair,none,20260989,generated
+ID072,8,brown skin,18-29,24,man,mixed heritage,none,shaved head,none,20260990,generated
+ID073,8,brown skin,30-44,35,woman,South Asian,none,hair pulled back tightly,none,20260991,generated
+ID074,8,brown skin,30-44,43,man,mixed heritage,none,short cropped hair,none,20260992,generated
+ID075,8,brown skin,45-59,58,woman,Sub-Saharan African,none,hair tied back,none,20260993,generated
+ID076,8,brown skin,45-59,53,man,Afro-Caribbean,none,hair pulled back tightly,light stubble,20260994,generated
+ID077,8,brown skin,60-74,70,woman,mixed heritage,none,hair tied back,none,20260995,generated
+ID078,8,brown skin,60-74,69,man,South Asian,none,hair tied back,none,20260996,generated
+ID079,8,brown skin,75+,83,woman,Afro-Caribbean,a few post-inflammatory dark marks on the cheeks,short hair,none,20260997,generated
+ID080,8,brown skin,75+,88,man,Aboriginal Australian,none,short hair,none,20260998,generated
+ID081,9,dark brown skin,18-29,27,woman,South Asian,none,hair tied back,none,20260999,generated
+ID082,9,dark brown skin,18-29,22,man,Afro-Caribbean,none,hair tied back,none,20261000,generated
+ID083,9,dark brown skin,30-44,41,woman,Melanesian,none,short cropped hair,none,20261001,generated
+ID084,9,dark brown skin,30-44,39,man,mixed heritage,none,hair pulled back tightly,light stubble,20261002,generated
+ID085,9,dark brown skin,45-59,57,woman,Melanesian,a few post-inflammatory dark marks on the cheeks,hair pulled back tightly,none,20261003,generated
+ID086,9,dark brown skin,45-59,58,man,South Asian,a few post-inflammatory dark marks on the cheeks,shaved head,none,20261004,generated
+ID087,9,dark brown skin,60-74,60,woman,Sub-Saharan African,a few solar lentigines on the cheeks and temples,hair tied back,none,20261005,generated
+ID088,9,dark brown skin,60-74,60,man,Afro-Caribbean,none,shaved head,short trimmed beard,20261006,generated
+ID089,9,dark brown skin,75+,80,woman,Afro-Caribbean,none,short hair,none,20261007,generated
+ID090,9,dark brown skin,75+,82,man,Sub-Saharan African,none,hair pulled back tightly,light stubble,20261008,generated
+ID091,10,"very dark, deep brown skin",18-29,27,woman,Sub-Saharan African,none,hair tied back,none,20261009,generated
+ID092,10,"very dark, deep brown skin",18-29,18,man,Afro-Caribbean,none,hair tied back,none,20261010,generated
+ID093,10,"very dark, deep brown skin",30-44,36,woman,Afro-Caribbean,none,hair tied back,none,20261011,generated
+ID094,10,"very dark, deep brown skin",30-44,38,man,Afro-Caribbean,none,hair pulled back tightly,moustache,20261012,generated
+ID095,10,"very dark, deep brown skin",45-59,55,woman,Sub-Saharan African,a few solar lentigines on the cheeks and temples,hair tied back,none,20261013,generated
+ID096,10,"very dark, deep brown skin",45-59,58,man,mixed heritage,a few solar lentigines on the cheeks and temples,short hair,none,20261014,generated
+ID097,10,"very dark, deep brown skin",60-74,60,woman,Sub-Saharan African,none,hair pulled back tightly,none,20261015,generated
+ID098,10,"very dark, deep brown skin",60-74,74,man,Afro-Caribbean,none,short hair,none,20261016,generated
+ID099,10,"very dark, deep brown skin",75+,78,woman,mixed heritage,none,short hair,none,20261017,generated
+ID100,10,"very dark, deep brown skin",75+,85,man,mixed heritage,scattered moles,hair tied back,none,20261018,generated

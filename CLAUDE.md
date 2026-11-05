@@ -41,8 +41,10 @@ you were given, for example `3d-ladder`). Commit as `Ao Zuo <316852364+0vvI@user
 
 ## Facts you can rely on
 
-- Median cheek ITA per prompted tone (from `labels/measurements_v1.csv`): 65.5, 55.4, 53.2, 51.5, 52.0, 51.4,
-  44.4, 36.5, 25.4, 4.9 (unrounded 4.945). The 4 Nov table had 53.3, 36.6 and 5.0; those three cells were wrong.
+- Median cheek ITA per prompted tone, computed from `labels/measurements_v1.csv` (10 values per tone, stored to
+  one decimal, so a median can land exactly on a half): 65.50, 55.35, 53.25, 51.50, 52.00, 51.40, 44.40, 36.55,
+  25.40, 4.95. Quote them to two decimals (or state the rounding rule), so any reader reproduces them from the
+  CSV. The 4 Nov table (53.3, 36.6, 5.0) is the same data rounded half-up; it was not wrong.
 - No prompt names a tone or a number. Each Monk tone is written as a phrase (`skin_words` in
   `labels/identities_v0.csv`, e.g. tone 3 "light skin with warm undertone", tone 6 "medium-tan skin"). Say "the
   phrases for tones 2–6 barely change the measured ITA", not "naming a middle tone".
@@ -56,4 +58,21 @@ you were given, for example `3d-ladder`). Commit as `Ao Zuo <316852364+0vvI@user
   prompted tone and portrait ITA it is −0.83 (re-derived independently on 5 Nov; recompute before quoting).
 - `docs/3d/renders.csv` lists what is in `docs/3d/tone_ladder.jpg`, column by column. Its `file` column names the
   local render, which is not in this repo.
+- `docs/3d/ID068_*` (prompted tone 7) and `docs/3d/ID089_*` (tone 9) are full heads: the whole pipeline run on
+  that identity's texture, so its identity-dependent skin maps are its own: colour, subdermal colour, scattering
+  weight, specular, micro height and normal, roughness, and the ear tiles. The scattering-radius and
+  micro-detail-weight maps are generic, the same on every head. Shared with the hero: the FLAME head shape, the
+  eye and brow method (the brow shape is a stock mask, not the identity's), the lights, and the hero's exposure
+  for each shot. They have no turntable. The same rule applies: not a fit to the portrait. Their cheek ITA is not
+  in any repo file, so don't quote one.
+- `docs/3d/texture_vs_portrait_ita.png` plots `labels/texture_ita.csv` (texture and portrait ITA against
+  prompted tone, the 31 textures).
+- `docs/3d/render_vs_texture_ita.png` plots `docs/3d/render_vs_texture_ita.csv`: the cheek ITA of the front render
+  (H01) of each of the seven ladder skins, against its texture's and its portrait's (render patches placed by
+  YuNet, as in `code/measure.py`). The renders keep the textures' order exactly (Spearman 1.0 over 7), but they
+  read lighter than the texture: by +5° to +8° for the four lightest skins (ID004 +5.2, ID056 +5.3, ID012 +8.0,
+  ID074 +8.0) and by more for the three darkest (ID068 +11.8, ID077 +15.1, ID089 +26.9). Say that. Don't call the
+  renders tone-accurate. Against the portraits the order differs (Spearman 0.89, the same as texture against
+  portrait): ID068 and ID077 render darker than ID074 although their portraits are lighter, because a render's
+  tone comes from its texture.
 - The gallery link (GitHub Pages) works only after Ao makes the repo public and turns Pages on.

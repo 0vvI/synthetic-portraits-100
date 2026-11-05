@@ -15,7 +15,7 @@ meas = {r["file"][:5]: r for r in csv.DictReader(open(root / "labels/measurement
 rng = np.random.default_rng(1)
 # the same landmark-placed cheek patches as measure.py, so each dot's colour is the pixels its ITA came from
 import cv2
-yunet = Path(__file__).resolve().parent / "face_detection_yunet_2023mar.onnx"   # opencv_zoo, Apache-2.0
+yunet = Path(__file__).resolve().parent / "face_detection_yunet_2023mar.onnx"   # opencv_zoo, MIT
 det = cv2.FaceDetectorYN.create(str(yunet), "", (320, 320), 0.6, 0.3, 5000)
 def cheek_rgb(path):
     img = cv2.imread(str(path)); h, w = img.shape[:2]

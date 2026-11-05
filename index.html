@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Synthetic Portraits 100</title>
-<meta name="description" content="100 AI-generated studio portraits of people who do not exist, balanced over 10 skin tones, 5 age bins and 2 gender presentations, with skin tone measured from every image.">
+<meta name="description" content="100 AI-generated studio portraits of people who do not exist, balanced over 10 prompted skin tones, 5 age bins and 2 gender presentations, with skin tone measured from every image.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Synthetic Portraits 100">
 <meta property="og:description" content="100 synthetic portraits over a 10 × 5 × 2 design, with skin tone measured from every image. Browse, filter, and see what the measurements show.">
@@ -82,12 +82,12 @@
 <body>
 <header>
   <h1>Synthetic Portraits 100</h1>
-  <p class="lede">100 AI-generated studio portraits of people who do not exist: one for each combination of 10 skin tones,
+  <p class="lede">100 AI-generated studio portraits of people who do not exist: one for each combination of 10 prompted skin tones,
     5 age bins and 2 gender presentations, with skin tone measured from every image (cheek ITA). Filter the set, or
     click a portrait for its labels.</p>
   <nav class="links" aria-label="Sections">
     <a href="#findings">What the measurements show</a>
-    <a href="#study3d">3D case study</a>
+    <a href="#study3d">3D skin materials</a>
     <a href="https://github.com/0vvI/synthetic-portraits-100">Code, labels and method on GitHub</a>
     <span>Ao Zuo · 2026</span>
   </nav>
@@ -101,34 +101,60 @@
     <figure class="shot chart"><img src="docs/ita_by_tone.png" width="1440" height="928" loading="lazy"
       alt="Scatter plot of measured cheek ITA against the prompted Monk Skin Tone for all 100 portraits, with the median for each tone"></figure>
     <div>
-      <p><b>Naming a middle tone barely changes the result.</b> Measured cheek ITA falls as the prompted tone deepens,
-        but tones 2 to 6 overlap almost completely (medians 55.4° to 51.4°). From tone 7 to 10 the medians fall
-        steadily, from 44.4° to 5.0°.</p>
+      <p><b>The middle tones collapse.</b> Measured cheek ITA falls as the prompted tone deepens, but the prompt
+        phrases for tones 2 to 6, from "light skin" to "medium-tan skin", overlap almost completely (medians 55.35°
+        to 51.40°). From tone 7 to 10 the medians fall steadily, from 44.40° to 4.95°.</p>
       <p><b>Equal prompts, unequal coverage.</b> By measured class the set skews light: 26 very light, 45 light,
         10 intermediate, 13 tan, 5 brown and 1 dark. Ten portraits per prompted tone does not give ten per measured tone.</p>
-      <p><b>Next experiment:</b> describe the tone (lightness, undertone) in the prompt instead of naming it.</p>
+      <p><b>Next experiment:</b> steer the middle tones with something more concrete than a phrase, such as a colour
+        reference.</p>
       <p class="muted">ITA = atan((L* − 50) / b*) in degrees, from two landmark-placed cheek patches per face; higher is
         lighter. Measured on studio-lit JPEGs, not a colour-calibrated capture.</p>
     </div>
   </div>
 </section>
 <section class="section" id="study3d">
-  <h2>3D case study: one identity so far</h2>
-  <p>ID012's description ("a 27-year-old East Asian man, shaved head") as an 8K skin texture on a generic 3D head
-    (FLAME 2023 Open), rendered in Blender Cycles with subsurface scattering. The head shape is not fitted to the
-    portrait, so this shows the identity's skin, not a 3D likeness of the photograph.</p>
-  <p class="muted">Status: 31 of the 100 identities have a texture that passes every automatic check. Only ID012 has
-    been rendered so far, with ID003's skin on the same head for comparison. The texture and head pipeline is not
-    part of this repository.</p>
-  <div class="split3d">
-    <figure class="shot turn"><img src="docs/3d/ID012_turntable.gif" width="384" height="480" loading="lazy"
-      alt="ID012's 3D head turning slowly"><figcaption>Turntable</figcaption></figure>
+  <h2>3D skin materials</h2>
+  <p>Each identity's text description, not its portrait, becomes a UV skin texture: an image model recolours a template texture, and
+    automatic gates check it at 2048, 4096 and 8192 px. 31 of the 100 pass every gate (prompted tones 1 to 9). Seven of
+    them are rendered here in Blender Cycles, with subsurface scattering from 4K material maps, on one generic FLAME
+    2023 Open head, so a render shows the identity's skin, not a 3D likeness of the portrait.</p>
+  <figure class="shot"><img src="docs/3d/tone_ladder.jpg" width="3700" height="1904" loading="lazy"
+    alt="Seven identities' skin on the same 3D head, lightest to darkest, front, three-quarter and close-up views">
+    <figcaption>Seven identities' skin on one head, ordered by the texture's cheek ITA (+69° to −55°). Head, eyes,
+    brow shape, lights and exposure are the same for every skin; only four skin maps change (colour, subdermal
+    colour, scattering weight, specular), with the ear's colour tile matched to each skin.</figcaption></figure>
+  <div class="split3d" style="margin-top: 24px">
+    <figure class="shot turn"><img src="docs/3d/ID012_turntable.gif" width="480" height="600" loading="lazy"
+      alt="ID012's 3D head turning slowly"><figcaption>ID012, turntable</figcaption></figure>
     <div>
       <figure class="shot"><img src="docs/3d/ID012_renders.jpg" width="2276" height="700" loading="lazy"
-        alt="ID012's 3D head in four lighting setups"><figcaption>Front, three-quarter, Rembrandt and backlit light.</figcaption></figure>
-      <figure class="shot"><img src="docs/3d/same_head_two_skins.jpg" width="2468" height="804" loading="lazy"
-        alt="The same 3D head with ID012's skin and with ID003's skin"><figcaption>Same head and light, two identities'
-        skin: ID012 (prompted tone 2) and ID003 (prompted tone 1). Only the textures differ.</figcaption></figure>
+        alt="ID012's 3D head in four lighting setups"><figcaption>The hero, ID012 (prompted tone 2): front,
+        three-quarter, Rembrandt and backlit light.</figcaption></figure>
+      <figure class="shot"><img src="docs/3d/ID012_closeups.jpg" width="2124" height="700" loading="lazy"
+        alt="Cheek, eye and lip close-ups of ID012's 3D skin"><figcaption>Cheek, eye and lip close-ups.</figcaption></figure>
+    </div>
+  </div>
+  <div style="display: grid; gap: 16px; margin-top: 24px">
+    <figure class="shot"><img src="docs/3d/ID068_renders.jpg" width="2276" height="700" loading="lazy"
+      alt="ID068's 3D head in four lighting setups"><figcaption>Full head ID068 (prompted tone 7).</figcaption></figure>
+    <figure class="shot"><img src="docs/3d/ID089_renders.jpg" width="2276" height="700" loading="lazy"
+      alt="ID089's 3D head in four lighting setups"><figcaption>Full head ID089 (prompted tone 9). Both ran the
+      whole pipeline on their own texture; the head shape, eye and brow method, lights and exposure are the
+      hero's.</figcaption></figure>
+  </div>
+  <div class="split" style="margin-top: 28px">
+    <figure class="shot chart"><img src="docs/3d/render_vs_texture_ita.png" width="1840" height="928" loading="lazy"
+      alt="Two scatter plots: each render's cheek ITA against its texture's and against its portrait's"></figure>
+    <div>
+      <p><b>The texture follows the prompt.</b> On the 31 gated textures, Spearman ρ between prompted tone and cheek
+        ITA is −0.96 for the texture and −0.83 for the portrait. Unlit texture against lit photograph: compare the
+        orderings, not the levels.</p>
+      <p><b>The render keeps the order but reads lighter.</b> The seven renders keep their textures' order exactly
+        (ρ 1.0) but measure lighter than the texture: +5° to +8° for the four lightest, +11.8°, +15.1° and +26.9° for
+        ID068, ID077 and ID089.</p>
+      <p class="muted">Render ITA from each front render, with the same YuNet cheek patches as the portraits. The
+        texture and head pipeline is not part of this repository.</p>
     </div>
   </div>
 </section>
@@ -136,6 +162,8 @@
   <p>The people shown do not exist, though a generated face can resemble a real person by chance. Portraits generated
     with Google Gemini and published for viewing and evaluation, not as AI training data.</p>
   <p>Images, labels and prompts: <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>. Code: MIT.
+    The 3D renders use the FLAME 2023 Open head model (Li et al., Max Planck Institute for Intelligent Systems),
+    <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
     <a href="https://github.com/0vvI/synthetic-portraits-100">Source on GitHub</a>.</p>
 </footer>
 <dialog id="dlg"><button class="close" aria-label="Close" onclick="dlg.close()">×</button><div class="detail" id="detail"></div></dialog>

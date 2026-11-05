@@ -7,7 +7,7 @@ check whether the generator actually delivered the tones it was asked for: at th
 the middle tones came out almost the same.
 
 **[Browse the gallery](https://0vvi.github.io/synthetic-portraits-100/)** (filter by tone, age and gender) ·
-[What the measurements show](#what-the-measurements-show) · [3D case study](#3d-case-study-one-identity-so-far) ·
+[What the measurements show](#what-the-measurements-show) · [3D skin materials](#3d-skin-materials) ·
 [Reproduce](#reproduce)
 
 ![contact sheet](docs/contact_sheet.jpg)
@@ -20,10 +20,12 @@ from 18–29 to 75+, a woman and a man in each.*
 - **A balanced design, delivered exactly:** 10 per tone, 20 per age bin, 50 women and 50 men.
 - **Skin tone measured, not assumed:** face detection, two landmark-placed cheek patches, CIELAB colour and the
   Individual Typology Angle (ITA) for every image.
-- **A clear finding:** prompting tones 2–6 barely changes the measured skin tone, and the set skews light even
+- **A clear finding:** the prompt phrases for tones 2–6 barely change the measured skin tone, and the set skews light even
   though every prompted tone has the same count.
 - **Reproducible and traceable:** the design sheet and all 100 prompts regenerate exactly from one seed, and every
   original image has a recorded sha256.
+- **3D skin materials:** seven identities' skin textures rendered on one head as a tone ladder, plus full heads
+  for ID068 and ID089, with each ladder skin's front-render tone measured against its texture and its portrait.
 
 ## What the measurements show
 
@@ -31,14 +33,15 @@ from 18–29 to 75+, a woman and a man in each.*
 
 | Prompted tone | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
 |---|---|---|---|---|---|---|---|---|---|---|
-| median ITA (°) | 65.5 | 55.4 | 53.3 | 51.5 | 52.0 | 51.4 | 44.4 | 36.6 | 25.4 | 5.0 |
+| median ITA (°) | 65.50 | 55.35 | 53.25 | 51.50 | 52.00 | 51.40 | 44.40 | 36.55 | 25.40 | 4.95 |
 
 - The measured cheek ITA falls with the prompted tone overall, but **tones 2–6 overlap almost completely**:
-  naming a middle tone in the prompt barely moves the measured cheek ITA. From tone 7 to 10 the medians fall
-  steadily, with wide overlap between neighbours.
+  the prompt phrases for tones 2–6, from "light skin" to "medium-tan skin", barely move the measured cheek ITA.
+  From tone 7 to 10 the medians fall steadily, with wide overlap between neighbours.
 - Measured, the set skews light: 26 very light, 45 light, 10 intermediate, 13 tan, 5 brown, 1 dark. Equal
   counts per prompted tone do not give equal coverage of measured tone.
-- For a v1, describing the tone (lightness, undertone) instead of naming it is the obvious next experiment.
+- The obvious next experiment is to steer the middle tones with something more concrete than a phrase, such as
+  a colour reference.
 
 ![cheek close-ups](docs/skin_detail.jpg)
 
@@ -56,7 +59,8 @@ the portrait whose measured ITA is closest to that tone's median.*
 | `prompts/` | the prompt template and the 100 prompts exactly as sent |
 | `code/` | design sheet, prompts, harvest, measurement, figures and gallery data |
 | `index.html` | the browsable gallery, served at the link above |
-| `docs/3d/` | renders of the 3D skin material (ID012; ID003 on the same head for comparison) |
+| `labels/texture_ita.csv` | for the 31 identities with a gated skin texture: the texture's and the portrait's cheek ITA |
+| `docs/3d/` | 3D renders: the ID012 hero, the seven-skin tone ladder, full heads ID068 and ID089, two tone charts |
 
 ## How it was made
 
@@ -83,32 +87,68 @@ the portrait whose measured ITA is closest to that tone's median.*
 
 Counts came out exactly as designed: 10 per tone, 20 per age bin, 50 women and 50 men.
 
-## 3D case study: one identity so far
+## 3D skin materials
+
+![seven identities' skin on one 3D head](docs/3d/tone_ladder.jpg)
+
+*Seven identities' skin on one head, ordered by the texture's measured cheek ITA (+69° to −55°): ID004, ID012,
+ID056, ID074, ID068, ID077, ID089. The head, eyes, brow shape and lights are the same for every skin, and every shot
+uses the hero's exposure, so differences in brightness are the skin's. Only the identity's skin maps change:
+colour, subdermal colour, scattering weight and specular, with the ear's colour tile matched to each skin.*
+
+Each skin texture is made from the identity's text description, not from its portrait: an image model recolours
+a template UV skin texture toward the description, and automatic gates check every result at 2048, 4096 and
+8192 px (layout, openings, lips, nose, baked shading, fine detail). 31 of the 100 identities have a texture that
+passes every gate, covering prompted tones 1–9 (none at tone 10). A private head pipeline then adds displacement,
+eyes, lashes, brows and shading maps, and Blender Cycles renders the head with random-walk subsurface scattering
+from 4K material maps. The head shape is one generic FLAME 2023 Open head for every skin, not a fit to the
+portrait, so a render shows the identity's skin, not a 3D likeness of the photograph. The texture and head
+pipeline is not part of this repository.
+
+### The hero: ID012
 
 ![ID012 turntable](docs/3d/ID012_turntable.gif)
 
-![ID012 rendered](docs/3d/ID012_renders.jpg)
+![ID012 in four lighting setups](docs/3d/ID012_renders.jpg)
 
 ![ID012 close-ups](docs/3d/ID012_closeups.jpg)
 
-*ID012 ("a 27-year-old East Asian man, shaved head") as an 8K UV skin texture on a 3D head, rendered in
-Blender Cycles with random-walk subsurface scattering: front, three-quarter, Rembrandt and backlit light;
-cheek, eye and lip close-ups.*
+*ID012 (prompted tone 2: a 27-year-old man of East Asian heritage, "light skin", shaved head): front,
+three-quarter, Rembrandt and backlit light, then cheek, eye and lip close-ups.*
 
-![same head, two skin materials](docs/3d/same_head_two_skins.jpg)
+### Two full heads at darker tones: ID068 and ID089
 
-*The same head shape and light with two identities' skin materials: ID012 (prompted tone 2) and ID003
-(prompted tone 1, "a 38-year-old East Asian woman"). Only the skin textures differ.*
+![ID068 in four lighting setups](docs/3d/ID068_renders.jpg)
 
-The texture comes from the identity text, not from the portrait: an image model recolours a template skin
-texture toward the description, and automatic gates check every result at 2048, 4096 and 8192 (layout,
-openings, lips, nose, baked shading, fine detail). A private head pipeline then adds displacement, eyes,
-lashes, brows and shading. The head shape is a generic FLAME 2023 Open head, not a fit to the portrait, so the
-render is the identity's skin, not a 3D likeness of the photograph.
+![ID089 in four lighting setups](docs/3d/ID089_renders.jpg)
 
-**Status:** 31 of the 100 identities have a texture that passes every gate. Only ID012 has been rendered so far,
-with ID003's texture on the same head for comparison; the other identities are not rendered yet. The texture
-and head pipeline is not part of this repository.
+*ID068 (prompted tone 7: a 68-year-old man of Sub-Saharan African heritage, "tan-brown skin") and ID089 (prompted
+tone 9: an 80-year-old woman of Afro-Caribbean heritage, "dark brown skin").*
+
+In the ladder only four skin maps (and the ear's colour tile) change per identity. These two went through the whole pipeline on their own
+texture, so their surface maps are their own as well: colour, subdermal colour, scattering weight, specular,
+micro height and normal, roughness, and the ear tiles. The scattering-radius and micro-detail-weight maps are the
+same generic maps on every head. Shared with the hero: the head shape, the eye and brow method (the brow shape is
+a stock mask, not the identity's), the lights, and the hero's exposure for each shot.
+
+### Does the rendered skin keep the tone?
+
+![texture and portrait cheek ITA against prompted tone](docs/3d/texture_vs_portrait_ita.png)
+
+- On the 31 gated textures, the texture's cheek ITA follows the prompted tone more closely than the portrait's:
+  Spearman ρ −0.96, against −0.83 for the portraits (`labels/texture_ita.csv`). The texture is an unlit colour
+  map and the portrait a studio-lit photograph, so compare their orderings, not their levels: the darkest
+  textures are far darker than their portraits.
+
+![render cheek ITA against texture and portrait](docs/3d/render_vs_texture_ita.png)
+
+- Each ladder skin's front render is measured the same way as the portraits (YuNet at 640 px, two cheek patches;
+  `docs/3d/render_vs_texture_ita.csv`). The renders keep the textures' order exactly (Spearman ρ 1.0 over the
+  seven) but read lighter than their textures: by +5° to +8° for the four lightest (ID004 +5.2, ID056 +5.3,
+  ID012 +8.0, ID074 +8.0) and by more for the three darkest (ID068 +11.8, ID077 +15.1, ID089 +26.9). The renders
+  are not tone-accurate, least of all at the dark end.
+- Against the portraits the order differs (Spearman ρ 0.89): ID068 and ID077 render darker than ID074 although
+  their portraits are lighter, because a render's tone comes from its texture.
 
 ## Limits
 
@@ -118,7 +158,8 @@ and head pipeline is not part of this repository.
 - The people are synthetic, but a generated face can resemble a real person by chance.
 - Estimated age and gender are not measured yet.
 - Adults only (18+).
-- The 3D renders cover one identity so far.
+- 3D: every skin is on one generic head shape, so no render is a likeness of its portrait; 7 of the 31
+  textures are shown rendered, and the renders read lighter than their textures, most at the dark end.
 
 ## Reproduce
 
@@ -162,3 +203,5 @@ This repository, the measurement fix and the public write-up: the same way, 4–
   `LICENSE-DATA`. Credit: "Synthetic Portraits 100, Ao Zuo, 2026".
 - `code/face_detection_yunet_2023mar.onnx` is from [opencv_zoo](https://github.com/opencv/opencv_zoo),
   MIT licence, copyright (c) 2020 Shiqi Yu (`code/YUNET_LICENSE`).
+- The 3D renders use the FLAME 2023 Open head model (Li et al., Max Planck Institute for Intelligent Systems),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).

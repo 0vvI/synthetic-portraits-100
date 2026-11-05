@@ -1,11 +1,21 @@
-Images (images/, docs/), labels (labels/) and prompts (prompts/) of Synthetic Portraits 100.
+Images (images/, docs/), labels (labels/) and prompts (prompts/) of Synthetic Portraits 100
 
-Licence: to be chosen by the owner before publication [P-2026-11-04-03]. Until then, all rights reserved,
-Ao Zuo, 2026. Viewing and linking are welcome.
+Copyright (c) 2026 Ao Zuo, to the extent that copyright subsists in this material.
 
-The portraits were generated with Google Gemini (Nano Banana 2) and show people who do not exist. Google
-states that it does not claim ownership of generated content. Google's terms list "using AI-generated
-content from our services to develop machine learning models or related AI technology" as abuse, so the
-images are offered for viewing and evaluation, not as training data. Use remains subject to Google's Terms
-of Service and Generative AI Prohibited Use Policy. In some jurisdictions purely AI-generated images are not
-protected by copyright.
+Licensed under the Creative Commons Attribution-NonCommercial 4.0 International licence (CC BY-NC 4.0).
+You may share and adapt the material for non-commercial purposes, provided you give appropriate credit,
+link to the licence and indicate if changes were made.
+
+Summary:   https://creativecommons.org/licenses/by-nc/4.0/
+Full text: https://creativecommons.org/licenses/by-nc/4.0/legalcode
+
+Suggested credit: "Synthetic Portraits 100, Ao Zuo, 2026, CC BY-NC 4.0"
+
+About the portraits: they were generated with Google Gemini (Nano Banana 2) and show people who do not exist.
+In some jurisdictions purely AI-generated images are not protected by copyright, and this licence grants only
+the rights Ao Zuo holds. Google states that it does not claim ownership of generated content. Google's terms
+list "using AI-generated content from our services to develop machine learning models or related AI
+technology" as abuse, so the images are offered for viewing and evaluation, not as training data. Use remains
+subject to Google's Terms of Service and Generative AI Prohibited Use Policy.
+
+The code (code/, index.html) is under the MIT licence; see LICENSE.

@@ -4,6 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Synthetic Portraits 100</title>
+<meta name="description" content="100 AI-generated studio portraits of people who do not exist, balanced over 10 skin tones, 5 age bins and 2 gender presentations, with skin tone measured from every image.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Synthetic Portraits 100">
+<meta property="og:description" content="100 synthetic portraits over a 10 × 5 × 2 design, with skin tone measured from every image. Browse, filter, and see what the measurements show.">
+<meta property="og:url" content="https://0vvi.github.io/synthetic-portraits-100/">
+<meta property="og:image" content="https://0vvi.github.io/synthetic-portraits-100/docs/social_card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <style>
   :root {
     --bg: #f6f6f7; --surface: #ffffff; --ink: #18181b; --ink-2: #52525b; --ink-3: #8a8a93;
@@ -30,11 +39,32 @@
   .count { max-width: 1240px; margin: 0 auto; padding: 4px 16px 0; color: var(--ink-3); font-size: 13px; }
   main { max-width: 1240px; margin: 0 auto; padding: 12px 16px 48px;
          display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
-  figure { margin: 0; background: var(--surface); border-radius: 8px; overflow: hidden; cursor: pointer;
+  #grid figure { margin: 0; background: var(--surface); border-radius: 8px; overflow: hidden; cursor: pointer;
            box-shadow: 0 0 0 1px var(--line); }
-  figure img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
-  figcaption { padding: 6px 8px 8px; font-size: 12px; color: var(--ink-2); display: flex; justify-content: space-between; }
-  figcaption b { color: var(--ink); font-weight: 600; }
+  #grid figure img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+  #grid figcaption { padding: 6px 8px 8px; font-size: 12px; color: var(--ink-2); display: flex; justify-content: space-between; }
+  #grid figcaption b { color: var(--ink); font-weight: 600; }
+  a { color: inherit; }
+  .links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin-top: 14px; font-size: 14px; }
+  .links a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink-3); }
+  .links a:hover { border-bottom-color: var(--ink); }
+  .links span { color: var(--ink-3); }
+  .section { max-width: 1240px; margin: 0 auto; padding: 40px 16px 8px; border-top: 1px solid var(--line); }
+  .section h2 { font-size: 21px; margin: 0 0 14px; letter-spacing: -0.01em; }
+  .section p { color: var(--ink-2); margin: 0 0 12px; max-width: 760px; }
+  .section p b { color: var(--ink); }
+  .section .muted { color: var(--ink-3); font-size: 13px; }
+  .shot { margin: 0; }
+  .shot img { display: block; width: 100%; height: auto; border-radius: 8px; }
+  .shot figcaption { color: var(--ink-3); font-size: 13px; padding: 6px 2px 0; }
+  .chart img { background: #ffffff; padding: 8px; box-shadow: 0 0 0 1px var(--line); }
+  .split { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 28px; align-items: start; }
+  .split3d { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); gap: 16px; align-items: start; margin-top: 8px; }
+  .split3d > div { display: grid; gap: 16px; }
+  footer { max-width: 1240px; margin: 32px auto 0; padding: 20px 16px 40px; border-top: 1px solid var(--line);
+           color: var(--ink-3); font-size: 13px; }
+  footer p { margin: 0 0 6px; max-width: 900px; }
+  @media (max-width: 760px) { .split, .split3d { grid-template-columns: 1fr; } .split3d .turn { max-width: 300px; } }
   dialog { border: 0; border-radius: 12px; padding: 0; max-width: min(880px, 94vw); background: var(--surface); color: var(--ink); }
   dialog::backdrop { background: rgba(0, 0, 0, 0.55); }
   .detail { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
@@ -52,12 +82,62 @@
 <body>
 <header>
   <h1>Synthetic Portraits 100</h1>
-  <p class="lede">AI-generated studio portraits of people who do not exist: one per cell of 10 skin tones × 5 age bins × 2 gender
-    presentations, with skin tone measured from each image (cheek ITA). Click a portrait for its labels.</p>
+  <p class="lede">100 AI-generated studio portraits of people who do not exist: one for each combination of 10 skin tones,
+    5 age bins and 2 gender presentations, with skin tone measured from every image (cheek ITA). Filter the set, or
+    click a portrait for its labels.</p>
+  <nav class="links" aria-label="Sections">
+    <a href="#findings">What the measurements show</a>
+    <a href="#study3d">3D case study</a>
+    <a href="https://github.com/0vvI/synthetic-portraits-100">Code, labels and method on GitHub</a>
+    <span>Ao Zuo · 2026</span>
+  </nav>
 </header>
 <div class="filters" id="filters"></div>
 <div class="count" id="count"></div>
 <main id="grid"></main>
+<section class="section" id="findings">
+  <h2>What the measurements show</h2>
+  <div class="split">
+    <figure class="shot chart"><img src="docs/ita_by_tone.png" width="1440" height="928" loading="lazy"
+      alt="Scatter plot of measured cheek ITA against the prompted Monk Skin Tone for all 100 portraits, with the median for each tone"></figure>
+    <div>
+      <p><b>Naming a middle tone barely changes the result.</b> Measured cheek ITA falls as the prompted tone deepens,
+        but tones 2 to 6 overlap almost completely (medians 55.4° to 51.4°). From tone 7 to 10 the medians fall
+        steadily, from 44.4° to 5.0°.</p>
+      <p><b>Equal prompts, unequal coverage.</b> By measured class the set skews light: 26 very light, 45 light,
+        10 intermediate, 13 tan, 5 brown and 1 dark. Ten portraits per prompted tone does not give ten per measured tone.</p>
+      <p><b>Next experiment:</b> describe the tone (lightness, undertone) in the prompt instead of naming it.</p>
+      <p class="muted">ITA = atan((L* − 50) / b*) in degrees, from two landmark-placed cheek patches per face; higher is
+        lighter. Measured on studio-lit JPEGs, not a colour-calibrated capture.</p>
+    </div>
+  </div>
+</section>
+<section class="section" id="study3d">
+  <h2>3D case study: one identity so far</h2>
+  <p>ID012's description ("a 27-year-old East Asian man, shaved head") as an 8K skin texture on a generic 3D head
+    (FLAME 2023 Open), rendered in Blender Cycles with subsurface scattering. The head shape is not fitted to the
+    portrait, so this shows the identity's skin, not a 3D likeness of the photograph.</p>
+  <p class="muted">Status: 31 of the 100 identities have a texture that passes every automatic check. Only ID012 has
+    been rendered so far, with ID003's skin on the same head for comparison. The texture and head pipeline is not
+    part of this repository.</p>
+  <div class="split3d">
+    <figure class="shot turn"><img src="docs/3d/ID012_turntable.gif" width="384" height="480" loading="lazy"
+      alt="ID012's 3D head turning slowly"><figcaption>Turntable</figcaption></figure>
+    <div>
+      <figure class="shot"><img src="docs/3d/ID012_renders.jpg" width="2276" height="700" loading="lazy"
+        alt="ID012's 3D head in four lighting setups"><figcaption>Front, three-quarter, Rembrandt and backlit light.</figcaption></figure>
+      <figure class="shot"><img src="docs/3d/same_head_two_skins.jpg" width="2468" height="804" loading="lazy"
+        alt="The same 3D head with ID012's skin and with ID003's skin"><figcaption>Same head and light, two identities'
+        skin: ID012 (prompted tone 2) and ID003 (prompted tone 1). Only the textures differ.</figcaption></figure>
+    </div>
+  </div>
+</section>
+<footer>
+  <p>The people shown do not exist, though a generated face can resemble a real person by chance. Portraits generated
+    with Google Gemini and published for viewing and evaluation, not as AI training data.</p>
+  <p>Images, labels and prompts: <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>. Code: MIT.
+    <a href="https://github.com/0vvI/synthetic-portraits-100">Source on GitHub</a>.</p>
+</footer>
 <dialog id="dlg"><button class="close" aria-label="Close" onclick="dlg.close()">×</button><div class="detail" id="detail"></div></dialog>
 <script>
 const groups = [

@@ -77,7 +77,7 @@ for r in rows:
     if r["gender_presentation"] == "woman" and r["hair"] == "shaved head" and r["id"] > "ID005":
         r["hair"] = "hair tied back"
 
-with open("labels/design_v0.csv", "w", newline="") as f:   # the unmeasured design; labels/identities_v0.csv adds the measured columns
+with open("labels/design_v0.csv", "w", newline="") as f:   # the unmeasured design; labels/identities_v0.csv is this sheet as used (same rows, status set, empty measurement columns dropped)
     w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
     w.writeheader(); w.writerows(rows)
 print(len(rows), "rows;", sum(r["pigment_feature"] != "none" for r in rows), "with a pigment feature")

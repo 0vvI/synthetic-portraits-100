@@ -1,47 +1,49 @@
 # Synthetic Portraits 100
 
-Private draft [P-2026-11-04-03]. Working name; the owner may rename it.
+One hundred AI-generated studio portraits of people who do not exist, one for each combination of **10 prompted
+skin tones × 5 age bins × 2 gender presentations**, with skin tone measured from every image. The design balances
+skin appearance rather than race: the same number of portraits for every prompted tone. The measurements then
+check whether the generator actually delivered the tones it was asked for: at the ends of the scale it did, but
+the middle tones came out almost the same.
 
-One hundred AI-generated studio portraits of people who do not exist, one per cell of a
-**10 prompted skin tones × 5 age bins × 2 gender presentations** design, with skin tone measured from each
-image. The design follows skin appearance rather than race: the same number of portraits for every prompted
-tone.
+**[Browse the gallery](https://0vvi.github.io/synthetic-portraits-100/)** (filter by tone, age and gender) ·
+[What the measurements show](#what-the-measurements-show) · [3D case study](#3d-case-study-one-identity-so-far) ·
+[Reproduce](#reproduce)
 
 ![contact sheet](docs/contact_sheet.jpg)
 
 *All 100, one row per prompted Monk Skin Tone (1 = lightest, 10 = deepest); along a row, the five age bins
 from 18–29 to 75+, a woman and a man in each.*
 
+## Highlights
+
+- **A balanced design, delivered exactly:** 10 per tone, 20 per age bin, 50 women and 50 men.
+- **Skin tone measured, not assumed:** face detection, two landmark-placed cheek patches, CIELAB colour and the
+  Individual Typology Angle (ITA) for every image.
+- **A clear finding:** prompting tones 2–6 barely changes the measured skin tone, and the set skews light even
+  though every prompted tone has the same count.
+- **Reproducible and traceable:** the design sheet and all 100 prompts regenerate exactly from one seed, and every
+  original image has a recorded sha256.
+
+## What the measurements show
+
+![measured ITA by prompted tone](docs/ita_by_tone.png)
+
+| Prompted tone | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| median ITA (°) | 65.5 | 55.4 | 53.3 | 51.5 | 52.0 | 51.4 | 44.4 | 36.6 | 25.4 | 5.0 |
+
+- The measured cheek ITA falls with the prompted tone overall, but **tones 2–6 overlap almost completely**:
+  naming a middle tone in the prompt barely moves the measured cheek ITA. From tone 7 to 10 the medians fall
+  steadily, with wide overlap between neighbours.
+- Measured, the set skews light: 26 very light, 45 light, 10 intermediate, 13 tan, 5 brown, 1 dark. Equal
+  counts per prompted tone do not give equal coverage of measured tone.
+- For a v1, describing the tone (lightness, undertone) instead of naming it is the obvious next experiment.
+
 ![cheek close-ups](docs/skin_detail.jpg)
 
 *Unretouched skin at the original resolution (320 px crops of 1792 × 2400 images): for each prompted tone,
 the portrait whose measured ITA is closest to that tone's median.*
-
-**[Browse all 100 with their labels](index.html)** (filter by tone, age and gender).
-
-## The same identity as a 3D skin material
-
-![ID012 turntable](docs/3d/ID012_turntable.gif)
-
-![ID012 rendered](docs/3d/ID012_renders.jpg)
-
-![ID012 close-ups](docs/3d/ID012_closeups.jpg)
-
-*ID012 ("a 27-year-old East Asian man, shaved head") as an 8K UV skin texture on a 3D head, rendered in
-Blender Cycles with random-walk subsurface scattering: front, three-quarter, Rembrandt and backlit light;
-cheek, eye and lip close-ups.*
-
-![same head, two skin materials](docs/3d/same_head_two_skins.jpg)
-
-*The same head shape and light with two identities' skin materials: ID012 (prompted tone 2) and ID003
-(prompted tone 1, "a 38-year-old East Asian woman"). Only the skin textures differ.*
-
-The texture comes from the identity text, not from the portrait: an image model recolours a template skin
-texture toward the description, and automatic gates check every result at 2048, 4096 and 8192 (layout,
-openings, lips, nose, baked shading, fine detail). 31 of the 100 identities have a texture that passes every
-gate. A private head pipeline then adds displacement, eyes, lashes, brows and shading. The head shape is a
-generic FLAME 2023 Open head, not a fit to the portrait, so the render is the identity's skin, not a 3D
-likeness of the photograph. The pipeline is not part of this repository.
 
 ## What is in it
 
@@ -53,8 +55,8 @@ likeness of the photograph. The pipeline is not part of this repository.
 | `labels/provenance.json` | per image: the generator's file name, sha256 and size |
 | `prompts/` | the prompt template and the 100 prompts exactly as sent |
 | `code/` | design sheet, prompts, harvest, measurement, figures and gallery data |
-| `index.html` | the browsable gallery |
-| `docs/3d/` | renders of the 3D skin materials (ID012; ID003 on the same head for comparison) |
+| `index.html` | the browsable gallery, served at the link above |
+| `docs/3d/` | renders of the 3D skin material (ID012; ID003 on the same head for comparison) |
 
 ## How it was made
 
@@ -81,20 +83,32 @@ likeness of the photograph. The pipeline is not part of this repository.
 
 Counts came out exactly as designed: 10 per tone, 20 per age bin, 50 women and 50 men.
 
-## What the measurements show
+## 3D case study: one identity so far
 
-![measured ITA by prompted tone](docs/ita_by_tone.png)
+![ID012 turntable](docs/3d/ID012_turntable.gif)
 
-| Prompted tone | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-|---|---|---|---|---|---|---|---|---|---|---|
-| median ITA (°) | 65.5 | 55.4 | 53.3 | 51.5 | 52.0 | 51.4 | 44.4 | 36.6 | 25.4 | 5.0 |
+![ID012 rendered](docs/3d/ID012_renders.jpg)
 
-- The measured cheek ITA falls with the prompted tone overall, but **tones 2–6 overlap almost completely**:
-  naming a middle tone in the prompt barely moves the measured cheek ITA. From tone 7 to 10 the medians
-  fall steadily, with wide overlap between neighbours.
-- Measured, the set skews light: 26 very light, 45 light, 10 intermediate, 13 tan, 5 brown, 1 dark. Equal
-  counts per prompted tone do not give equal coverage of measured tone.
-- For a v1, describing the tone (lightness, undertone) instead of naming it is the obvious next experiment.
+![ID012 close-ups](docs/3d/ID012_closeups.jpg)
+
+*ID012 ("a 27-year-old East Asian man, shaved head") as an 8K UV skin texture on a 3D head, rendered in
+Blender Cycles with random-walk subsurface scattering: front, three-quarter, Rembrandt and backlit light;
+cheek, eye and lip close-ups.*
+
+![same head, two skin materials](docs/3d/same_head_two_skins.jpg)
+
+*The same head shape and light with two identities' skin materials: ID012 (prompted tone 2) and ID003
+(prompted tone 1, "a 38-year-old East Asian woman"). Only the skin textures differ.*
+
+The texture comes from the identity text, not from the portrait: an image model recolours a template skin
+texture toward the description, and automatic gates check every result at 2048, 4096 and 8192 (layout,
+openings, lips, nose, baked shading, fine detail). A private head pipeline then adds displacement, eyes,
+lashes, brows and shading. The head shape is a generic FLAME 2023 Open head, not a fit to the portrait, so the
+render is the identity's skin, not a 3D likeness of the photograph.
+
+**Status:** 31 of the 100 identities have a texture that passes every gate. Only ID012 has been rendered so far,
+with ID003's texture on the same head for comparison; the other identities are not rendered yet. The texture
+and head pipeline is not part of this repository.
 
 ## Limits
 
@@ -104,6 +118,7 @@ Counts came out exactly as designed: 10 per tone, 20 per age bin, 50 women and 5
 - The people are synthetic, but a generated face can resemble a real person by chance.
 - Estimated age and gender are not measured yet.
 - Adults only (18+).
+- The 3D renders cover one identity so far.
 
 ## Reproduce
 
@@ -111,17 +126,19 @@ Run from the repository root (Python 3, `numpy`, `opencv-python` 5.0, `Pillow`, 
 
 ```
 python3 code/make_manifest.py                                  # labels/design_v0.csv from seed 20260918
-python3 code/build_prompts.py labels/identities_v0.csv --all   # the 100 prompts in prompts/
+python3 code/build_prompts.py labels/identities_v0.csv --all > prompts/prompts_identities_v0.txt
 python3 code/measure.py identities                             # labels/measurements_v1.csv from portraits/identities/
 python3 code/make_sheets.py portraits/identities               # images/thumbs/ and docs/contact_sheet.jpg
 python3 code/skin_strip.py portraits/identities                # docs/skin_detail.jpg
 python3 code/plot_ita.py portraits/identities                  # docs/ita_by_tone.png
 python3 code/make_gallery_data.py                              # labels/gallery.json for index.html
+python3 code/make_social_card.py                               # docs/social_card.jpg, the gallery's link preview
 ```
 
-The design sheet and the 100 prompts reproduce exactly from the seed, and re-running `measure.py` on the
-originals reproduces `labels/measurements_v1.csv` (checked 4 Nov 2026). The full-size images (287 MB) are not in this repository; put them in
-`portraits/identities/`.
+`make_manifest.py` writes the unmeasured design sheet; its design columns match `labels/identities_v0.csv`
+row for row, and `build_prompts.py` reproduces the 100 prompts byte for byte (both checked 5 Nov 2026).
+Re-running `measure.py` on the originals reproduces `labels/measurements_v1.csv` (checked 4 Nov 2026). The
+full-size images (287 MB) are not in this repository; put them in `portraits/identities/`.
 
 ## Terms and use
 
@@ -136,10 +153,12 @@ downloads.
 ## Who wrote what
 
 Design, prompts, generation runs and measurement: Claude Code sessions directed by Ao Zuo, 18–20 Sep 2026.
-This repository and the measurement fix: the same way, 4 Nov 2026.
+This repository, the measurement fix and the public write-up: the same way, 4–5 Nov 2026.
 
 ## Licence
 
-Code (`code/`, `index.html`): MIT, see `LICENSE`. Images, labels and prompts: see `LICENSE-DATA`.
-`code/face_detection_yunet_2023mar.onnx` is from [opencv_zoo](https://github.com/opencv/opencv_zoo),
-MIT licence, copyright (c) 2020 Shiqi Yu (`code/YUNET_LICENSE`).
+- Code (`code/`, `index.html`): MIT, see `LICENSE`.
+- Images, labels and prompts: [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/), see
+  `LICENSE-DATA`. Credit: "Synthetic Portraits 100, Ao Zuo, 2026".
+- `code/face_detection_yunet_2023mar.onnx` is from [opencv_zoo](https://github.com/opencv/opencv_zoo),
+  MIT licence, copyright (c) 2020 Shiqi Yu (`code/YUNET_LICENSE`).

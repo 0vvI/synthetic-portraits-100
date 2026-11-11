@@ -116,9 +116,9 @@
 <section class="section" id="study3d">
   <h2>3D skin materials</h2>
   <p>Each identity's text description, not its portrait, becomes a UV skin texture: an image model recolours a template texture, and
-    automatic gates check it at 2048, 4096 and 8192 px. 31 of the 100 pass every gate (prompted tones 1 to 9). Seven of
-    them are rendered here in Blender Cycles, with subsurface scattering from 4K material maps, on one generic FLAME
-    2023 Open head, so a render shows the identity's skin, not a 3D likeness of the portrait.</p>
+    automatic gates check it at 2048, 4096 and 8192 px. 31 of the 100 pass every gate (prompted tones 1 to 9). Twelve of
+    them are rendered here, in two batches, in Blender Cycles, with subsurface scattering from 4K material maps, on one
+    generic FLAME 2023 Open head, so a render shows the identity's skin, not a 3D likeness of the portrait.</p>
   <figure class="shot"><img src="docs/3d/tone_ladder.jpg" width="3700" height="1904" loading="lazy"
     alt="Seven identities' skin on the same 3D head, lightest to darkest, front, three-quarter and close-up views">
     <figcaption>Seven identities' skin on one head, ordered by the texture's cheek ITA (+69° to −55°). Head, eyes,
@@ -143,6 +143,12 @@
       whole pipeline on their own texture; the head shape, eye and brow method, lights and exposure are the
       hero's.</figcaption></figure>
   </div>
+  <figure class="shot" style="margin-top: 24px"><img src="docs/3d/batch2/tone_ladder_front.jpg" width="2640" height="714" loading="lazy"
+    alt="Five more identities' skin on the same 3D head, front view, lightest to deepest">
+    <figcaption>Batch 2: ID003, ID024, ID034, ID050 and ID065 (prompted tones 1, 3, 4, 5 and 7) as ladder skins on the
+    same head, lights and exposures as the hero, filling tones 3 to 5. Their front renders read +4.8° to +6.1° lighter
+    than their textures. <a href="https://github.com/0vvI/synthetic-portraits-100/blob/main/docs/3d/batch2/README.md">Details,
+    close-ups and numbers</a>.</figcaption></figure>
   <div class="split" style="margin-top: 28px">
     <figure class="shot chart"><img src="docs/3d/render_vs_texture_ita.png" width="1840" height="928" loading="lazy"
       alt="Two scatter plots: each render's cheek ITA against its texture's and against its portrait's"></figure>
@@ -152,7 +158,8 @@
         orderings, not the levels.</p>
       <p><b>The render keeps the order but reads lighter.</b> The seven renders keep their textures' order exactly
         (ρ 1.0) but measure lighter than the texture: +5° to +8° for the four lightest, +11.8°, +15.1° and +26.9° for
-        ID068, ID077 and ID089.</p>
+        ID068, ID077 and ID089. The five batch 2 skins (tones 1, 3, 4, 5 and 7, not in this chart) also keep their
+        order and read +4.8° to +6.1° lighter than their textures.</p>
       <p class="muted">Render ITA from each front render, with the same YuNet cheek patches as the portraits. The
         texture and head pipeline is not part of this repository.</p>
     </div>

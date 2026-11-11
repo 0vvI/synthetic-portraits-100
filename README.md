@@ -24,8 +24,9 @@ from 18–29 to 75+, a woman and a man in each.*
   though every prompted tone has the same count.
 - **Reproducible and traceable:** the design sheet and all 100 prompts regenerate exactly from one seed, and every
   original image has a recorded sha256.
-- **3D skin materials:** seven identities' skin textures rendered on one head as a tone ladder, plus full heads
-  for ID068 and ID089, with each ladder skin's front-render tone measured against its texture and its portrait.
+- **3D skin materials:** twelve identities' skin textures rendered on one head as a tone ladder, in two batches
+  (seven, then five more that add tones 3 to 5), plus full heads for ID068 and ID089, with each ladder skin's
+  front-render tone measured against its texture and its portrait.
 
 ## What the measurements show
 
@@ -166,7 +167,7 @@ and numbers: [`docs/3d/batch2/`](docs/3d/batch2/README.md).*
 - The people are synthetic, but a generated face can resemble a real person by chance.
 - Estimated age and gender are not measured yet.
 - Adults only (18+).
-- 3D: every skin is on one generic head shape, so no render is a likeness of its portrait; 7 of the 31
+- 3D: every skin is on one generic head shape, so no render is a likeness of its portrait; 12 of the 31
   textures are shown rendered, and the renders read lighter than their textures, most at the dark end.
 
 ## Reproduce

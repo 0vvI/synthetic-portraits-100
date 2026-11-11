@@ -43,6 +43,8 @@ in line with the four lightest skins of the first ladder (+5° to +8°).
 
 - One generic FLAME head for every skin: a render shows the identity's skin, not a 3D likeness of the portrait.
   On this head the two women (ID003, ID065) read masculine.
-- The portrait and the texture disagree a lot for ID034, ID050 and ID065 (13–21° of ITA): the texture comes from
-  the text description, not from the portrait.
-- Some stubble comes with the shared template skin: it shows faintly on ID065, whose description has no facial hair.
+- Texture and portrait ITA are different measurements (an unlit colour map against a studio-lit portrait), so compare
+  orderings, not levels: over these five the order differs once (Spearman 0.9; ID065's portrait is lighter than
+  ID050's, its texture darker), because the texture comes from the text description, not from the portrait.
+- Some stubble comes with the shared template skin: it shows on ID024 and ID034 and faintly on ID065, whose
+  descriptions have no facial hair. (ID050's moustache is in his description.)

@@ -60,7 +60,7 @@ the portrait whose measured ITA is closest to that tone's median.*
 | `code/` | design sheet, prompts, harvest, measurement, figures and gallery data |
 | `index.html` | the browsable gallery, served at the link above |
 | `labels/texture_ita.csv` | for the 31 identities with a gated skin texture: the texture's and the portrait's cheek ITA |
-| `docs/3d/` | 3D renders: the ID012 hero, the seven-skin tone ladder, full heads ID068 and ID089, two tone charts |
+| `docs/3d/` | 3D renders: the ID012 hero, the seven-skin tone ladder, full heads ID068 and ID089, two tone charts; `batch2/` adds five more ladder skins (tones 1, 3, 4, 5, 7) |
 
 ## How it was made
 
@@ -130,6 +130,14 @@ texture, so their surface maps are their own as well: colour, subdermal colour, 
 micro height and normal, roughness, and the ear tiles. The scattering-radius and micro-detail-weight maps are the
 same generic maps on every head. Shared with the hero: the head shape, the eye and brow method (the brow shape is
 a stock mask, not the identity's), the lights, and the hero's exposure for each shot.
+
+### Batch 2: filling tones 3–5
+
+![five more identities' skin on one 3D head](docs/3d/batch2/tone_ladder_front.jpg)
+
+*ID003, ID024, ID034, ID050 and ID065 (prompted tones 1, 3, 4, 5 and 7) rendered as ladder skins on the same
+head, lights and exposures. Their front renders read +4.8° to +6.1° lighter than their textures. Details, close-ups
+and numbers: [`docs/3d/batch2/`](docs/3d/batch2/README.md).*
 
 ### Does the rendered skin keep the tone?
 

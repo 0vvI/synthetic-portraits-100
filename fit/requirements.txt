@@ -1,0 +1,8 @@
+numpy
+scipy
+opencv-python
+mediapipe
+matplotlib
+pillow
+pybind11
+pytest

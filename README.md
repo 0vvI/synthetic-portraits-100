@@ -8,7 +8,7 @@ the middle tones came out almost the same.
 
 **[Browse the gallery](https://0vvi.github.io/synthetic-portraits-100/)** (filter by tone, age and gender) ·
 [What the measurements show](#what-the-measurements-show) · [3D skin materials](#3d-skin-materials) ·
-[Reproduce](#reproduce)
+[Head-shape fit](#head-shape-fit) · [Reproduce](#reproduce)
 
 ![contact sheet](docs/contact_sheet.jpg)
 
@@ -27,6 +27,9 @@ from 18–29 to 75+, a woman and a man in each.*
 - **3D skin materials:** twelve identities' skin textures rendered on one head as a tone ladder, in two batches
   (seven, then five more that add tones 3 to 5), plus full heads for ID068 and ID089, with each ladder skin's
   front-render tone measured against its texture and its portrait.
+- **A head-shape fit that is scored on what it did not see:** a 3D head model fitted to every portrait's face
+  landmarks, with a solver written twice (numpy and C++17) to one contract. On unseen landmarks the error falls
+  from 2.91 % of the eye distance (mean head) to 0.27 %.
 
 ## What the measurements show
 
@@ -62,6 +65,8 @@ the portrait whose measured ITA is closest to that tone's median.*
 | `index.html` | the browsable gallery, served at the link above |
 | `labels/texture_ita.csv` | for the 31 identities with a gated skin texture: the texture's and the portrait's cheek ITA |
 | `docs/3d/` | 3D renders: the ID012 hero, the seven-skin tone ladder, full heads ID068 and ID089, two tone charts; `batch2/` adds five more ladder skins (tones 1, 3, 4, 5, 7) |
+| `fit/` | the head-shape fit: the contract (`SPEC.md`), the numpy and C++ solvers, tests, the landmarks, the fitted coefficients and every evaluation table; its own [README](fit/README.md) |
+| `docs/fit/` | the fit's figures |
 
 ## How it was made
 
@@ -159,6 +164,57 @@ and numbers: [`docs/3d/batch2/`](docs/3d/batch2/README.md).*
 - Against the portraits the order differs (Spearman ρ 0.89): ID068 and ID077 render darker than ID074 although
   their portraits are lighter, because a render's tone comes from its texture.
 
+## Head-shape fit
+
+![the fitted head on ten portraits](docs/fit/overlay.jpg)
+
+*Ten portraits, one per prompted tone. Left: the portrait. Middle: the fitted head drawn over it. Right: the
+fitted head alone, seen by the fitted camera. The number is the fit's landmark error in percent of the distance
+between the eyes.*
+
+A statistical 3D head model (FLAME 2023 Open: a mean head plus shape and expression directions learned from
+scans) and a camera pose are fitted to the 468 face landmarks that MediaPipe finds in each portrait. The fit is
+built in stages, and each stage is scored on landmarks it never saw: 60 % of the landmarks are fitted, 20 % choose
+the settings and 20 % are read once, for the score. This is a separate analysis; the renders above still use
+one generic head.
+
+![error on unseen landmarks by stage](docs/fit/stage_error.png)
+
+| Stage | What it adds | Error on unseen landmarks, median over the 100 portraits |
+|---|---|---|
+| M0 | mean head, camera pose only | 2.91 % |
+| M1 | + shape | 1.26 % |
+| M2 | + expression | 1.11 % |
+| M3 | + one focal length for all portraits | 1.07 % |
+| M4 | + landmark offsets learned from other portraits | 0.27 % |
+
+Errors are in percent of the distance between the eyes (a median of 384 px, so 2.91 % is about 11 px and 0.27 %
+about 1 px). The full fit beats the mean head on all 100 portraits.
+
+- **The finding behind M4.** Up to M3 the error stopped near 1.1 %, and a fit that left the eye landmarks out
+  predicted them worse than the mean head did (3.84 % against 2.56 %). The leftover error was nearly the same on
+  every portrait: the detector does not place its landmarks exactly where the geometric landmark-to-head mapping
+  put them, by up to 3.3 mm around the eyes. One small offset per landmark, learned on half of the portraits and
+  applied to the other half, removes it; the left-out eyes then come in at 0.58 %. The offsets learned from the
+  two halves agree (correlation 0.999).
+- **Settings are chosen without the test landmarks,** and only among settings that keep the faces plausible (at
+  most 5 % of the portraits with a coefficient beyond 3 standard deviations). Validation error alone rewards
+  extreme faces.
+- **One solver, written twice.** A contract ([`fit/SPEC.md`](fit/SPEC.md)) fixes the maths, the Levenberg-Marquardt
+  loop with a hand-derived Jacobian, the interfaces and the tests. A numpy reference and a C++17 core
+  ([`fit/fitcore/`](fit/fitcore/), Eigen, a Python module through pybind11) follow it separately.
+  On the 100 real fits they agree to better than 1e-12 and end with the same status after the same number of
+  steps. On speed: almost all the time is one matrix product, which numpy already hands to a tuned library, so the
+  C++ core is only level with numpy on a single fit (24.5 ms against 21.6 ms) unless it is built over the same
+  library (7.0 ms). Fitting the 100 portraits as one batch takes 0.74 s, or 0.49 s over that library, against
+  2.29 s for numpy.
+- **What it is not.** There is no ground-truth 3D shape for people who do not exist. The fit is a
+  landmark-constrained estimate from one frontal still: depth is weakly determined (the focal length barely
+  changes the error), and a low error means the model reproduces the detector's landmarks, not that the 3D shape
+  is right.
+
+Method, all tables, the region test, the offsets and the limits: [`fit/README.md`](fit/README.md).
+
 ## Limits
 
 - One identity per cell: good for coverage, too small for per-cell statistics.
@@ -169,6 +225,8 @@ and numbers: [`docs/3d/batch2/`](docs/3d/batch2/README.md).*
 - Adults only (18+).
 - 3D: every skin is on one generic head shape, so no render is a likeness of its portrait; 12 of the 31
   textures are shown rendered, and the renders read lighter than their textures, most at the dark end.
+- Head-shape fit: scored against a detector's landmarks, not against real 3D shape, and from one frontal still
+  per person, so depth is weakly determined. The fitted shapes are not used in the renders.
 
 ## Reproduce
 
@@ -190,6 +248,9 @@ row for row, and `build_prompts.py` reproduces the 100 prompts byte for byte (bo
 Re-running `measure.py` on the originals reproduces `labels/measurements_v1.csv` (checked 4 Nov 2026). The
 full-size images (287 MB) are not in this repository; put them in `portraits/identities/`.
 
+The head-shape fit has its own commands in [`fit/README.md`](fit/README.md#reproduce). Its tests and charts run
+from this repository alone; the fit itself needs the FLAME model, which is downloaded separately.
+
 ## Terms and use
 
 The portraits were made with Google Gemini. Google states that it does not claim ownership of generated
@@ -204,13 +265,20 @@ downloads.
 
 Design, prompts, generation runs and measurement: Claude Code sessions directed by Ao Zuo, 18–20 Sep 2026.
 This repository, the measurement fix and the public write-up: the same way, 4–5 Nov 2026.
+The head-shape fit (`fit/`): the same way, 11–12 Nov 2026. The numpy solver and the C++ core were written
+separately from one contract and compared; numbers and text were checked by a second model.
 
 ## Licence
 
-- Code (`code/`, `index.html`): MIT, see `LICENSE`.
+- Code (`code/`, `fit/` except `fit/embedding/third_party/` and `fit/results/`, `index.html`): MIT, see `LICENSE`.
 - Images, labels and prompts: [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/), see
   `LICENSE-DATA`. Credit: "Synthetic Portraits 100, Ao Zuo, 2026".
 - `code/face_detection_yunet_2023mar.onnx` is from [opencv_zoo](https://github.com/opencv/opencv_zoo),
   MIT licence, copyright (c) 2020 Shiqi Yu (`code/YUNET_LICENSE`).
-- The 3D renders use the FLAME 2023 Open head model (Li et al., Max Planck Institute for Intelligent Systems),
-  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+- The 3D renders and the head-shape fit use the FLAME 2023 Open head model (Li et al., Max Planck Institute for
+  Intelligent Systems), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The model files are not in
+  this repository.
+- `fit/embedding/third_party/canonical_face_model.obj` is MediaPipe's canonical face mesh (Google), Apache-2.0;
+  the licence is beside it. The landmarks in `fit/results/` were found with MediaPipe Face Landmarker.
+- `fit/results/` and `docs/fit/` (landmarks, fitted coefficients, tables, figures) are derived from the
+  portraits and carry the same terms as the images and labels.

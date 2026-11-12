@@ -88,6 +88,7 @@
   <nav class="links" aria-label="Sections">
     <a href="#findings">What the measurements show</a>
     <a href="#study3d">3D skin materials</a>
+    <a href="#fit">Head-shape fit</a>
     <a href="https://github.com/0vvI/synthetic-portraits-100">Code, labels and method on GitHub</a>
     <span>Ao Zuo · 2026</span>
   </nav>
@@ -165,12 +166,44 @@
     </div>
   </div>
 </section>
+<section class="section" id="fit">
+  <h2>Head-shape fit</h2>
+  <p>A statistical 3D head model (FLAME 2023 Open) and a camera pose are fitted to the 468 face landmarks that MediaPipe
+    finds in each portrait. Every stage is scored on landmarks the fit never saw. This is a separate analysis: the
+    renders above still use one generic head.</p>
+  <figure class="shot"><img src="docs/fit/overlay.jpg" width="1812" height="1548" loading="lazy"
+    alt="Ten portraits, each shown plain, with the fitted 3D head drawn over it as a wireframe, and as a shaded head alone">
+    <figcaption>Ten portraits, one per prompted tone. Left: the portrait. Middle: the fitted head drawn over it. Right:
+    the fitted head alone, seen by the fitted camera. The number is the fit's landmark error in percent of the distance
+    between the eyes.</figcaption></figure>
+  <div class="split" style="margin-top: 28px">
+    <figure class="shot chart"><img src="docs/fit/stage_error.png" width="1280" height="736" loading="lazy"
+      alt="Dot plot of the error on unseen landmarks for the five stages of the fit, one dot per portrait, with medians 2.91, 1.26, 1.11, 1.07 and 0.27 percent"></figure>
+    <div>
+      <p><b>Scored on what it did not see.</b> 60 % of the landmarks are fitted, 20 % choose the settings and 20 % are
+        read once, for the score. The mean head with its best pose misses those by 2.91 % of the distance
+        between the eyes (about 11 px); the full fit by 0.27 % (about 1 px),
+        and it is better on all 100 portraits.</p>
+      <p><b>A mismatch found and removed.</b> Up to stage M3 the error stopped near 1.1 %, and a fit that left the
+        eye landmarks out predicted them worse than the mean head did (3.84 % against
+        2.56 %). The leftover error was nearly the same on every portrait: the detector does not place
+        its landmarks exactly where the geometric mapping put them, by up to 3.3 mm around the eyes.
+        One small offset per landmark, learned on half of the portraits and applied to the other half, removes it.</p>
+      <p><b>One solver, written twice.</b> A written contract fixes the maths and the tests; a numpy reference and a
+        C++17 core follow it separately and are compared with each other.</p>
+      <p class="muted">There is no ground-truth 3D shape for people who do not exist. The fit is a landmark-constrained
+        estimate from one frontal still, so depth is weakly determined.
+        <a href="https://github.com/0vvI/synthetic-portraits-100/blob/main/fit/README.md">Method, tables and limits</a>.</p>
+    </div>
+  </div>
+</section>
 <footer>
   <p>The people shown do not exist, though a generated face can resemble a real person by chance. Portraits generated
     with Google Gemini and published for viewing and evaluation, not as AI training data.</p>
   <p>Images, labels and prompts: <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>. Code: MIT.
-    The 3D renders use the FLAME 2023 Open head model (Li et al., Max Planck Institute for Intelligent Systems),
-    <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+    The 3D renders and the head-shape fit use the FLAME 2023 Open head model (Li et al., Max Planck Institute for
+    Intelligent Systems), <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>; the landmarks come from
+    MediaPipe Face Landmarker (Google, Apache-2.0).
     <a href="https://github.com/0vvI/synthetic-portraits-100">Source on GitHub</a>.</p>
 </footer>
 <dialog id="dlg"><button class="close" aria-label="Close" onclick="dlg.close()">×</button><div class="detail" id="detail"></div></dialog>

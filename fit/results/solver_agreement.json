@@ -1,0 +1,52 @@
+{
+ "problems": 100,
+ "landmarks_used": 464,
+ "coefficients": 250,
+ "setting": {
+  "focal_mm": 50.0,
+  "n_shape": 200,
+  "p_shape": 0.5,
+  "n_expr": 50,
+  "p_expr": 0.75
+ },
+ "options": {
+  "max_iter": 200,
+  "lam0": 0.001,
+  "ftol": 1e-12,
+  "xtol": 1e-12
+ },
+ "largest_difference": {
+  "R": 8.604228440844963e-16,
+  "t_metres": 4.440892098500626e-16,
+  "theta": 5.209721543053547e-14,
+  "cost_relative": 1.2013402830962759e-14
+ },
+ "same_status": 100,
+ "same_iteration_count": 100,
+ "iterations_median": 8.0,
+ "not_converged": {
+  "numpy": 0,
+  "cpp": 0
+ },
+ "ms_per_solve_median": {
+  "numpy": 21.604,
+  "cpp": 24.499
+ },
+ "speedup_median": 0.9,
+ "loop_ms": {
+  "numpy": 2290.2,
+  "cpp": 2672.4
+ },
+ "batch_100_ms": {
+  "one_thread": 2662.46,
+  "all_threads": 744.84
+ },
+ "machine": {
+  "processor": "arm",
+  "system": "Darwin",
+  "python": "3.12.14",
+  "numpy": "2.5.4",
+  "numpy_blas": "accelerate"
+ },
+ "cpp_build": "default"
+}

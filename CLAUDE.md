@@ -13,6 +13,8 @@ kinds of session work on it:
 | Path | Owner | Cloud sessions |
 |---|---|---|
 | `docs/3d/**`, `labels/texture_ita.csv`, `CLAUDE.md` | local session | read, link, describe; never edit or regenerate |
+| `fit/results/**`, `fit/embedding/*.npz` and `.csv`, `docs/fit/**` | local session (needs the FLAME model and the full-size portraits) | read, link, describe; never edit or regenerate |
+| `fit/**` code, `fit/SPEC.md`, `fit/README.md`, `.github/workflows/fitcore.yml` | local session | propose changes in a pull request; the tests (`ctest`, `pytest fit/tests`) must stay green |
 | `README.md`, `index.html`, `code/**`, `docs/*.png|jpg` outside `docs/3d` | cloud session | edit freely |
 | `LICENSE*`, the credit name | Ao's decision | keep as they are, flag questions |
 | `images/`, `labels/*` except texture_ita.csv, `prompts/` | frozen data | never edit |
@@ -37,6 +39,13 @@ you were given, for example `3d-ladder`). Commit as `Ao Zuo <316852364+0vvI@user
   - Texture tone and portrait tone are different measurements: unlit albedo against a studio-lit JPEG. Compare
     their orderings, not their levels (the darkest textures are far darker than their portraits).
 - The pipeline code, `.blend` files and texture maps are not in this repo and will not be. Don't promise them.
+- The head-shape fit (`fit/`) is a separate analysis. The renders do not use the fitted shapes, so "not a fit to
+  the portrait" stays true for every render. Never call a fitted head accurate, a reconstruction or a likeness:
+  there is no ground-truth 3D shape, and the fit is scored against a detector's landmarks.
+- FLAME model files and the MediaPipe model are never committed (`fit/assets/` is ignored). The landmark
+  mapping, the offsets and the fitted coefficients are derived data and are committed.
+- Every number about the fit comes from `python fit/report.py`, which reads `fit/results/summary.json` and
+  `solver_agreement.json`. Paste from its output; don't retype.
 - Every number in the README must come from a file in this repo. Recompute it, don't copy it.
 
 ## Facts you can rely on

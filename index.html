@@ -188,7 +188,8 @@
         eye landmarks out predicted them worse than the mean head did (3.84 % against
         2.56 %). The leftover error was nearly the same on every portrait: the detector does not place
         its landmarks exactly where the geometric mapping put them, by up to 3.3 mm around the eyes.
-        One small offset per landmark, learned on half of the portraits and applied to the other half, removes it.</p>
+        One small offset per landmark, learned on half of the portraits and applied to the other half, removes it,
+        so the last stage's score is held out across portraits, not across landmarks.</p>
       <p><b>One solver, written twice.</b> A written contract fixes the maths and the tests; a numpy reference and a
         C++17 core follow it separately and are compared with each other.</p>
       <p class="muted">There is no ground-truth 3D shape for people who do not exist. The fit is a landmark-constrained

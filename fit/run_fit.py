@@ -7,11 +7,13 @@ portraits; M4 adds per-landmark offsets that correct where the detector's landma
 
 Two rules keep the numbers honest.
 - Every setting (how many coefficients, how strong the prior, which focal length) is chosen on the validation
-  landmarks and reported on the test landmarks, which no fit ever sees. A setting can only be chosen if it
-  keeps the faces plausible: at most 5 % of the portraits may get a coefficient beyond 3 standard deviations.
-  Without that rule the validation landmarks, which sit between fitted ones, reward extreme faces.
+  landmarks and reported on the test landmarks, which a portrait's own fit never sees. A setting can only be
+  chosen if it keeps the faces plausible: at most 5 % of the portraits may get a coefficient beyond 3 standard
+  deviations. Without that rule the validation landmarks, which sit between fitted ones, reward extreme
+  faces.
 - The M4 offsets are learned from other portraits. The portraits are split into two halves; each half is
-  fitted with offsets learned from the other half only.
+  fitted with offsets learned from the other half only. Learning uses all landmarks of those other portraits,
+  so the M4 test error is held out across portraits, not across landmark ids.
 
 The full run tries about 700 settings and is meant for the C++ solver (fit/fitcore). --quick tries about 60
 and suits the numpy solver; send its output somewhere else with --out so it does not replace the full results.

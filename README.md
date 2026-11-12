@@ -196,7 +196,8 @@ about 1 px). The full fit beats the mean head on all 100 portraits.
   every portrait: the detector does not place its landmarks exactly where the geometric landmark-to-head mapping
   put them, by up to 3.3 mm around the eyes. One small offset per landmark, learned on half of the portraits and
   applied to the other half, removes it; the left-out eyes then come in at 0.58 %. The offsets learned from the
-  two halves agree (correlation 0.999).
+  two halves agree (correlation 0.999). M4's score is therefore held out across portraits: a portrait's test
+  landmarks take no part in its own fit, but each offset was learned on the same landmark of other portraits.
 - **Settings are chosen without the test landmarks,** and only among settings that keep the faces plausible (at
   most 5 % of the portraits with a coefficient beyond 3 standard deviations). Validation error alone rewards
   extreme faces.
@@ -266,7 +267,9 @@ downloads.
 Design, prompts, generation runs and measurement: Claude Code sessions directed by Ao Zuo, 18–20 Sep 2026.
 This repository, the measurement fix and the public write-up: the same way, 4–5 Nov 2026.
 The head-shape fit (`fit/`): the same way, 11–12 Nov 2026. The numpy solver and the C++ core were written
-separately from one contract and compared; numbers and text were checked by a second model.
+separately from one contract and compared. The portraits' measurements and the 3D section were checked by a
+second model. For the fit, a second model recomputed the tables from the per-portrait files; the fit's
+evaluation code and write-up have not had an independent review yet.
 
 ## Licence
 

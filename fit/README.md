@@ -18,9 +18,11 @@ skin; the fitted shapes are not used there.
   plus shape and expression directions learned from scans) and one camera pose per portrait, to the 468 face
   landmarks that [MediaPipe Face Landmarker](https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker)
   finds in the image.
-- **How it is scored.** The landmarks are split once: 60 % are fitted, 20 % choose the settings, 20 % are only
-  ever used for the final score. Error is the distance between a predicted and an observed landmark, in percent
-  of the distance between the eyes (a median of 384 px on these 1792 × 2400 images).
+- **How it is scored.** The landmarks are split once: 60 % are fitted, 20 % choose the settings, and 20 % are
+  kept for the final score: a portrait's test landmarks never enter its own fit or the choice of a setting
+  (stage M4 adds one qualification, [below](#the-landmark-offsets-m4)). Error is the distance between a
+  predicted and an observed landmark, in percent of the distance between the eyes (a median of 384 px on these
+  1792 × 2400 images).
 - **Result.** On unseen landmarks the mean head with its best pose misses by 2.91 % (about 11 px). The full fit
   misses by 0.27 % (about 1 px), and is better than the mean head on all 100 portraits.
 - **A finding on the way.** Fitting shape alone left a floor of about 1.1 %. The remaining error was almost the
@@ -94,6 +96,10 @@ around the eyes (the eye contours and the upper eyelids).
   median is 1.37 mm.
 - They are learned from other portraits. The 100 portraits are split into two halves; each half is fitted with
   offsets learned only from the other half. Every M4 number above is measured that way.
+- What that holds out, and what it does not. Learning the offsets uses every landmark of the other half's
+  portraits, the test landmarks among them. So M4's score is held out across portraits: a portrait's own test
+  landmarks take no part in its fit or in the offsets applied to it, but the offset of each test landmark was
+  learned on that same landmark in other portraits. Stages M0 to M3 never use the test landmarks at all.
 - The two halves give the same offsets: correlation 0.999, a mean difference of 0.035 mm against a mean size of
   0.574 mm. So the offsets describe the detector and the head model, not particular faces.
 - The offsets alone do little: the mean face with offsets (the control row) still misses by 2.55 %. The gain
@@ -227,5 +233,6 @@ MediaPipe model (Apache-2.0, downloaded separately); their outputs are already i
 - [Eigen](https://eigen.tuxfamily.org) (MPL-2.0) and [pybind11](https://github.com/pybind/pybind11) (BSD-3-Clause)
   are build dependencies, not copied here.
 - Designed and directed by Ao Zuo; written with Claude Code sessions, 11–12 Nov 2026. The C++ core and the numpy
-  reference were written separately from `SPEC.md` and then compared; numbers and text were checked by a second
-  model before publication.
+  reference were written separately from `SPEC.md` and then compared. A second model recomputed the tables on
+  this page from the per-portrait files in `results/`; the evaluation code and this text have not had an
+  independent review yet.

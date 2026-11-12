@@ -1,7 +1,6 @@
 # Notes for Claude sessions working on this repository
 
-This is a portfolio project for Ao Zuo's CV. It should look good, and every number in it must be correct. Two
-kinds of session work on it:
+This is Ao Zuo's portfolio project. Every number in it must be correct. Two kinds of session work on it:
 
 - **The local session** on Ao's Mac. It has the full-size portraits, the private texture and head pipeline,
   Blender, and the 31 skin textures. It produces everything under `docs/3d/`, plus `labels/texture_ita.csv`.

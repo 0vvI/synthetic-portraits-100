@@ -77,7 +77,8 @@ you were given, for example `3d-ladder`). Commit as `Ao Zuo <316852364+0vvI@user
   weight, specular, micro height and normal, roughness, and the ear tiles, plus its own eyes, lashes and mesh
   relief. The scattering-radius and micro-detail-weight maps are generic, the same on every head. Each sits on its
   own fitted head shape. Shared with the hero: the eye and brow method (the brow shape is a stock mask, not the
-  identity's), the lights, and the hero's exposure for each shot. They have no turntable. Their cheek ITA is not in any repo file, so don't quote one.
+  identity's), the lights, and the hero's exposure for each shot. They have no turntable. Their cheek ITA is not
+  in any repo file, so don't quote one.
 - `docs/3d/texture_vs_portrait_ita.png` plots `labels/texture_ita.csv` (texture and portrait ITA against
   prompted tone, the 31 textures).
 - `docs/3d/render_vs_texture_ita.png` plots `docs/3d/render_vs_texture_ita.csv`: the cheek ITA of the front render
@@ -86,7 +87,7 @@ you were given, for example `3d-ladder`). Commit as `Ao Zuo <316852364+0vvI@user
   order exactly (Spearman 1.0 over 7), but they read lighter than the texture: by +6.7° to +12.2° for the four
   lightest skins (ID004 +6.7, ID056 +9.9, ID012 +11.6, ID074 +12.2) and by more for the three darkest (ID068 +15.1,
   ID077 +16.0, ID089 +29.8). Say that. Don't call the renders tone-accurate. The head shape alone moves a render's
-  ITA: ID012 with the same maps read 53.3° on the old stock head and 56.9° on its fitted head. Against the portraits the order differs (Spearman 0.89, the same as texture against
-  portrait): ID068 and ID077 render darker than ID074 although their portraits are lighter, because a render's
-  tone comes from its texture.
+  ITA: ID012 with the same maps read 53.3° on the old stock head and 56.9° on its fitted head. Against the
+  portraits the order differs (Spearman 0.89, the same as texture against portrait): ID068 and ID077 render
+  darker than ID074 although their portraits are lighter, because a render's tone comes from its texture.
 - The gallery link (GitHub Pages) works only after Ao makes the repo public and turns Pages on.

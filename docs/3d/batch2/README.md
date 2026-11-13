@@ -22,7 +22,7 @@ renders are Blender Cycles at 128 samples, 1200×1500 (heads) and 1024×1024 (cl
 
 | Head | Prompted tone | Description (from `labels/identities_v0.csv`) | Portrait ITA | Texture ITA | Render ITA |
 |:---:|:---:|:---|:---:|:---:|:---:|
-| ID003 | 1 | woman, 38, East Asian, "very light, pale skin" | +70.7° | +70.2° | +75.1° |
+| ID003 | 1 | woman, 38, East Asian, "very light, pale skin" | +70.7° | +70.2° | +75.0° |
 | ID024 | 3 | man, 31, Southern European, "light skin with warm undertone" | +50.6° | +42.6° | +53.1° |
 | ID034 | 4 | man, 34, mixed heritage, "light-medium skin" | +50.1° | +37.3° | +45.7° |
 | ID050 | 5 | man, 84, Southeast Asian, "medium skin" | +42.8° | +27.6° | +38.1° |
@@ -39,8 +39,8 @@ Per head: [ID003](ID003_renders.jpg) · [close-ups](ID003_closeups.jpg) —
 ![render cheek ITA against texture cheek ITA](render_vs_texture_ita.png)
 
 The front renders are measured like the portraits (YuNet at 640 px, two cheek patches;
-`render_vs_texture_ita.csv`). They keep the textures' order and read +4.9° to +10.5° lighter than their textures,
-in line with the four lightest skins of the first ladder (+6.7° to +12.2°).
+`render_vs_texture_ita.csv`). They keep the textures' order and read +4.8° to +10.5° lighter than their textures:
+about as much as the four lightest skins of the first ladder (+6.7° to +12.2°), and least for the lightest, ID003.
 
 ## Limits
 

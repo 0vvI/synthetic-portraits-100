@@ -1,5 +1,5 @@
 label,id,render_ita,render_ita_lr_diff,patch_method,texture_ita,portrait_ita,exposure_used
-ID003Lfit,ID003,75.1,2.1,yunet@640,70.2,70.7,-2.5415247048908283
+ID003Lfit,ID003,75.0,2.3,yunet@640,70.2,70.7,-2.5415247048908283
 ID024Lfit,ID024,53.1,0.6,yunet@640,42.6,50.6,-2.5415247048908283
 ID034Lfit,ID034,45.7,4.2,yunet@640,37.3,50.1,-2.5415247048908283
 ID050Lfit,ID050,38.1,1.8,yunet@640,27.6,42.8,-2.5415247048908283

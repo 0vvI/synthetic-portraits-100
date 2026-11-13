@@ -168,7 +168,7 @@ shot.
 ![five more identities' skin, each on its own fitted head](docs/3d/batch2/tone_ladder_front.jpg)
 
 *ID003, ID024, ID034, ID050 and ID065 (prompted tones 1, 3, 4, 5 and 7) rendered as ladder skins, each on its own
-fitted head, with the hero's lights and exposures. Their front renders read +4.9° to +10.5° lighter than their
+fitted head, with the hero's lights and exposures. Their front renders read +4.8° to +10.5° lighter than their
 textures. Details, close-ups and numbers: [`docs/3d/batch2/`](docs/3d/batch2/README.md).*
 
 ### Does the rendered skin keep the tone?
@@ -188,8 +188,9 @@ textures. Details, close-ups and numbers: [`docs/3d/batch2/`](docs/3d/batch2/REA
   ID012 +11.6, ID074 +12.2) and by more for the three darkest (ID068 +15.1, ID077 +16.0, ID089 +29.8). The renders
   are not tone-accurate, least of all at the dark end.
 - The head shape moves the measured tone too. ID012's skin maps are the same on the stock head and on its fitted
-  head, yet its front render reads 53.3° on the first and 56.9° on the second: the fitted cheeks are fuller and
-  face the top light more. A render's ITA mixes skin, shape and light.
+  head, yet its front render reads 53.3° on the first (this CSV as of commit aea53bb) and 56.9° on the second. The
+  cheek patches sit in the same places; the fitted cheeks catch more of the top light. A render's ITA mixes skin,
+  shape and light.
 - Against the portraits the order differs (Spearman ρ 0.89): ID068 and ID077 render darker than ID074 although
   their portraits are lighter, because a render's tone comes from its texture.
 
@@ -299,11 +300,13 @@ downloads.
 
 Design, prompts, generation runs and measurement: Claude Code sessions directed by Ao Zuo, 18–20 Sep 2026.
 This repository, the measurement fix and the public write-up: the same way, 4–5 Nov 2026.
-The head-shape fit (`fit/`): the same way, 11–12 Nov 2026. The renders on fitted head shapes and the ladder skins'
-own roughness and relief maps: the same way, 13 Nov 2026. The numpy solver and the C++ core were written
-separately from one contract and compared. The portraits' measurements and the 3D section were checked by a
-second model. For the fit, a second model recomputed the tables from the per-portrait files; the fit's
-evaluation code and write-up have not had an independent review yet.
+The head-shape fit (`fit/`): the same way, 11–12 Nov 2026. The numpy solver and the C++ core were written
+separately from one contract and compared. The renders on fitted head shapes and the ladder skins' own roughness
+and relief maps: the same way, 13 Nov 2026. The portraits' measurements and the first 3D section were checked by a
+second model. For the fit, a second model recomputed the tables from the per-portrait files; the fit's evaluation
+code and write-up have not had an independent review yet. The 13 Nov changes were checked by a separate Claude
+agent that had not written them (every tone number recomputed from the CSVs, every map claim against the render
+configuration, and the shape transfer code read); its two findings were fixed before publishing.
 
 ## Licence
 

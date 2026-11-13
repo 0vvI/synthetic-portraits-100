@@ -9,8 +9,8 @@ never saw. The solver exists twice, in numpy and in C++17, written to one contra
 Left: the portrait. Middle: the fitted head drawn over it. Right: the fitted head alone, seen by the fitted camera.
 The number is the fit's landmark error in percent of the distance between the eyes.*
 
-This is a separate analysis. The 3D renders elsewhere in this repository still use one generic head for every
-skin; the fitted shapes are not used there.
+The 3D renders elsewhere in this repository use these fitted shapes (shape only, neutral expression): each
+rendered skin sits on its own identity's fitted head.
 
 ## In short
 

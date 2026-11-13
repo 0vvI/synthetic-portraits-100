@@ -1,10 +1,14 @@
 # Synthetic Portraits 100
 
-One hundred AI-generated studio portraits of people who do not exist, one for each combination of **10 prompted
-skin tones × 5 age bins × 2 gender presentations**, with skin tone measured from every image. The design balances
-skin appearance rather than race: the same number of portraits for every prompted tone. The measurements then
-check whether the generator actually delivered the tones it was asked for: at the ends of the scale it did, but
-the middle tones came out almost the same.
+One hundred AI-generated people who do not exist, taken from a studio photograph to a rendered 3D head, in three
+steps. **Portraits:** 100 studio portraits, one for each combination of **10 prompted skin tones × 5 age bins ×
+2 gender presentations** (balanced over skin appearance, not race), with skin tone measured on every image; the
+generator delivered the two ends of the tone scale but made the middle tones almost the same. **Head shapes:** a
+3D head model (FLAME) fitted to each portrait's 468 face landmarks by one solver written twice, in numpy and C++17,
+and scored on landmarks the fit did not see. **Skin:** for twelve of the people, a skin texture made from their
+text description, turned into a full set of 4K material maps (colour, subdermal colour, scattering, specular,
+roughness, fine relief) and rendered in Blender Cycles on that person's fitted head shape, with the rendered tone
+measured against the texture and the photograph.
 
 **[Browse the gallery](https://0vvi.github.io/synthetic-portraits-100/)** (filter by tone, age and gender) ·
 [What the measurements show](#what-the-measurements-show) · [3D skin materials](#3d-skin-materials) ·
@@ -24,12 +28,12 @@ from 18–29 to 75+, a woman and a man in each.*
   though every prompted tone has the same count.
 - **Reproducible and traceable:** the design sheet and all 100 prompts regenerate exactly from one seed, and every
   original image has a recorded sha256.
-- **3D skin materials:** twelve identities' skin textures rendered on one head as a tone ladder, in two batches
-  (seven, then five more that add tones 3 to 5), plus full heads for ID068 and ID089, with each ladder skin's
-  front-render tone measured against its texture and its portrait.
+- **3D skin materials:** twelve identities' skins, each a full set of 4K material maps, rendered on that person's
+  fitted head shape as a tone ladder in two batches (seven, then five more that add tones 3 to 5), plus full heads
+  for ID068 and ID089, with each ladder skin's front-render tone measured against its texture and its portrait.
 - **A head-shape fit that is scored on what it did not see:** a 3D head model fitted to every portrait's face
   landmarks, with a solver written twice (numpy and C++17) to one contract. On unseen landmarks the error falls
-  from 2.91 % of the eye distance (mean head) to 0.27 %.
+  from 2.91 % of the eye distance (mean head) to 0.27 %. The fitted shapes are the heads in the 3D renders.
 
 ## What the measurements show
 
@@ -95,21 +99,44 @@ Counts came out exactly as designed: 10 per tone, 20 per age bin, 50 women and 5
 
 ## 3D skin materials
 
-![seven identities' skin on one 3D head](docs/3d/tone_ladder.jpg)
+![seven identities' skin, each on its own fitted head](docs/3d/tone_ladder.jpg)
 
-*Seven identities' skin on one head, ordered by the texture's measured cheek ITA (+69° to −55°): ID004, ID012,
-ID056, ID074, ID068, ID077, ID089. The head, eyes, brow shape and lights are the same for every skin, and every shot
-uses the hero's exposure, so differences in brightness are the skin's. Only the identity's skin maps change:
-colour, subdermal colour, scattering weight and specular, with the ear's colour tile matched to each skin.*
+*Seven identities, each with its own skin maps on its own fitted head shape, ordered by the texture's measured
+cheek ITA (+69° to −55°): ID004, ID012, ID056, ID074, ID068, ID077, ID089. Eyes, lashes, brow shape and lights are
+the same for every head, and every shot uses the hero's exposure, so differences in brightness are the skin's.*
 
 Each skin texture is made from the identity's text description, not from its portrait: an image model recolours
 a template UV skin texture toward the description, and automatic gates check every result at 2048, 4096 and
 8192 px (layout, openings, lips, nose, baked shading, fine detail). 31 of the 100 identities have a texture that
-passes every gate, covering prompted tones 1–9 (none at tone 10). A private head pipeline then adds displacement,
-eyes, lashes, brows and shading maps, and Blender Cycles renders the head with random-walk subsurface scattering
-from 4K material maps. The head shape is one generic FLAME 2023 Open head for every skin, not a fit to the
-portrait, so a render shows the identity's skin, not a 3D likeness of the photograph. The texture and head
-pipeline is not part of this repository.
+passes every gate, covering prompted tones 1–9 (none at tone 10). For each rendered identity a private head
+pipeline turns the texture into a set of 4K material maps and adds eyes, lashes and brows, and Blender Cycles
+renders the head with random-walk subsurface scattering. The texture and head pipeline is not part of this
+repository.
+
+**Head shape.** Every render uses that identity's head shape from the [head-shape fit](#head-shape-fit) below:
+shape only, with a neutral expression. The fitted change from the pipeline's base head is carried onto the
+180,000-vertex render mesh, the eyes move with their sockets and the lashes with the lids; the UV layout and every
+material map stay as they are. The fit is to 468 face landmarks in one frontal photograph, so the face is the
+fit's estimate, not a scan or a likeness, and the back of the head and the neck come from the head model's
+statistics, not from the photograph.
+
+![portrait, stock head and fitted head for four identities](docs/3d/fitted_vs_stock.jpg)
+
+*Front renders on the single stock head used until 13 Nov 2026, and on each person's fitted head, beside the
+portrait: ID012 and ID089 (same skin maps on both heads), ID003 and ID065 (their own roughness and relief maps
+replace ID012's on the fitted head, see the table below).*
+
+**What each head's material set holds.** There is no separate displacement map: relief at the scale of the render
+mesh (median edge 0.54 mm; up to 0.35 mm deep) is baked into the mesh, and finer relief is a micro height map and a
+micro normal map read as bump.
+
+| Map | Twelve ladder skins | Full heads ID068, ID089 |
+|---|---|---|
+| colour, subdermal colour, scattering weight, specular, roughness, micro height, micro normal (4K) | the identity's own | the identity's own |
+| scattering radius, micro-detail weight | one map for every identity (the pipeline makes them identity-independent) | the same |
+| relief baked into the mesh, eyes and irises, lashes, ear relief | ID012's | the identity's own |
+| ear colour | ID012's ear tile matched to the skin | the identity's own |
+| brow shape | a stock mask | a stock mask |
 
 ### The hero: ID012
 
@@ -131,19 +158,18 @@ three-quarter, Rembrandt and backlit light, then cheek, eye and lip close-ups.*
 *ID068 (prompted tone 7: a 68-year-old man of Sub-Saharan African heritage, "tan-brown skin") and ID089 (prompted
 tone 9: an 80-year-old woman of Afro-Caribbean heritage, "dark brown skin").*
 
-In the ladder only four skin maps (and the ear's colour tile) change per identity. These two went through the whole pipeline on their own
-texture, so their surface maps are their own as well: colour, subdermal colour, scattering weight, specular,
-micro height and normal, roughness, and the ear tiles. The scattering-radius and micro-detail-weight maps are the
-same generic maps on every head. Shared with the hero: the head shape, the eye and brow method (the brow shape is
-a stock mask, not the identity's), the lights, and the hero's exposure for each shot.
+These two went through the whole pipeline on their own texture, so beyond their own material maps they have their
+own eyes, lashes, ear tiles and mesh relief, each on its own fitted head shape. Shared with the hero: the eye and
+brow method (the brow shape is a stock mask, not the identity's), the lights, and the hero's exposure for each
+shot.
 
 ### Batch 2: filling tones 3–5
 
-![five more identities' skin on one 3D head](docs/3d/batch2/tone_ladder_front.jpg)
+![five more identities' skin, each on its own fitted head](docs/3d/batch2/tone_ladder_front.jpg)
 
-*ID003, ID024, ID034, ID050 and ID065 (prompted tones 1, 3, 4, 5 and 7) rendered as ladder skins on the same
-head, lights and exposures. Their front renders read +4.8° to +6.1° lighter than their textures. Details, close-ups
-and numbers: [`docs/3d/batch2/`](docs/3d/batch2/README.md).*
+*ID003, ID024, ID034, ID050 and ID065 (prompted tones 1, 3, 4, 5 and 7) rendered as ladder skins, each on its own
+fitted head, with the hero's lights and exposures. Their front renders read +4.9° to +10.5° lighter than their
+textures. Details, close-ups and numbers: [`docs/3d/batch2/`](docs/3d/batch2/README.md).*
 
 ### Does the rendered skin keep the tone?
 
@@ -158,9 +184,12 @@ and numbers: [`docs/3d/batch2/`](docs/3d/batch2/README.md).*
 
 - Each ladder skin's front render is measured the same way as the portraits (YuNet at 640 px, two cheek patches;
   `docs/3d/render_vs_texture_ita.csv`). The renders keep the textures' order exactly (Spearman ρ 1.0 over the
-  seven) but read lighter than their textures: by +5° to +8° for the four lightest (ID004 +5.2, ID056 +5.3,
-  ID012 +8.0, ID074 +8.0) and by more for the three darkest (ID068 +11.8, ID077 +15.1, ID089 +26.9). The renders
+  seven) but read lighter than their textures: by +6.7° to +12.2° for the four lightest (ID004 +6.7, ID056 +9.9,
+  ID012 +11.6, ID074 +12.2) and by more for the three darkest (ID068 +15.1, ID077 +16.0, ID089 +29.8). The renders
   are not tone-accurate, least of all at the dark end.
+- The head shape moves the measured tone too. ID012's skin maps are the same on the stock head and on its fitted
+  head, yet its front render reads 53.3° on the first and 56.9° on the second: the fitted cheeks are fuller and
+  face the top light more. A render's ITA mixes skin, shape and light.
 - Against the portraits the order differs (Spearman ρ 0.89): ID068 and ID077 render darker than ID074 although
   their portraits are lighter, because a render's tone comes from its texture.
 
@@ -175,8 +204,8 @@ between the eyes.*
 A statistical 3D head model (FLAME 2023 Open: a mean head plus shape and expression directions learned from
 scans) and a camera pose are fitted to the 468 face landmarks that MediaPipe finds in each portrait. The fit is
 built in stages, and each stage is scored on landmarks it never saw: 60 % of the landmarks are fitted, 20 % choose
-the settings and 20 % are read once, for the score. This is a separate analysis; the renders above still use
-one generic head.
+the settings and 20 % are read once, for the score. The 3D renders above use the final fitted shapes (shape only,
+neutral expression).
 
 ![error on unseen landmarks by stage](docs/fit/stage_error.png)
 
@@ -224,10 +253,14 @@ Method, all tables, the region test, the offsets and the limits: [`fit/README.md
 - The people are synthetic, but a generated face can resemble a real person by chance.
 - Estimated age and gender are not measured yet.
 - Adults only (18+).
-- 3D: every skin is on one generic head shape, so no render is a likeness of its portrait; 12 of the 31
-  textures are shown rendered, and the renders read lighter than their textures, most at the dark end.
+- 3D: each skin sits on its own fitted head shape, which comes from the face landmarks of one photograph, so no
+  render is a likeness of its portrait, and the back of the head and the neck come from the head model. The ladder
+  heads share ID012's eyes, lashes and mesh relief, and every texture is a recolouring of one template, so the
+  faces still look alike: brows, lids and some stubble come from the template, and the two women in batch 2
+  (ID003, ID065) read masculine. 12 of the 31 textures are shown rendered, and the renders read lighter than
+  their textures, most at the dark end.
 - Head-shape fit: scored against a detector's landmarks, not against real 3D shape, and from one frontal still
-  per person, so depth is weakly determined. The fitted shapes are not used in the renders.
+  per person, so depth is weakly determined. The renders use the fitted shape with a neutral expression.
 
 ## Reproduce
 
@@ -266,7 +299,8 @@ downloads.
 
 Design, prompts, generation runs and measurement: Claude Code sessions directed by Ao Zuo, 18–20 Sep 2026.
 This repository, the measurement fix and the public write-up: the same way, 4–5 Nov 2026.
-The head-shape fit (`fit/`): the same way, 11–12 Nov 2026. The numpy solver and the C++ core were written
+The head-shape fit (`fit/`): the same way, 11–12 Nov 2026. The renders on fitted head shapes and the ladder skins'
+own roughness and relief maps: the same way, 13 Nov 2026. The numpy solver and the C++ core were written
 separately from one contract and compared. The portraits' measurements and the 3D section were checked by a
 second model. For the fit, a second model recomputed the tables from the per-portrait files; the fit's
 evaluation code and write-up have not had an independent review yet.

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Synthetic Portraits 100</title>
-<meta name="description" content="100 AI-generated studio portraits of people who do not exist, balanced over 10 prompted skin tones, 5 age bins and 2 gender presentations, with skin tone measured from every image.">
+<meta name="description" content="100 AI-generated people who do not exist, from studio portrait to rendered 3D head: skin tone measured on every image, a 3D head shape fitted to every face, and twelve rendered skins on their own fitted heads.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Synthetic Portraits 100">
 <meta property="og:description" content="100 synthetic portraits over a 10 × 5 × 2 design, with skin tone measured from every image. Browse, filter, and see what the measurements show.">
@@ -82,9 +82,10 @@
 <body>
 <header>
   <h1>Synthetic Portraits 100</h1>
-  <p class="lede">100 AI-generated studio portraits of people who do not exist: one for each combination of 10 prompted skin tones,
-    5 age bins and 2 gender presentations, with skin tone measured from every image (cheek ITA). Filter the set, or
-    click a portrait for its labels.</p>
+  <p class="lede">100 AI-generated people who do not exist, taken from a studio photograph to a rendered 3D head:
+    portraits over 10 prompted skin tones, 5 age bins and 2 gender presentations, with skin tone measured on every
+    image (cheek ITA); a 3D head shape fitted to each portrait's face landmarks; and, for twelve of them, a full set of
+    skin material maps rendered on their own fitted head. Filter the set, or click a portrait for its labels.</p>
   <nav class="links" aria-label="Sections">
     <a href="#findings">What the measurements show</a>
     <a href="#study3d">3D skin materials</a>
@@ -118,13 +119,19 @@
   <h2>3D skin materials</h2>
   <p>Each identity's text description, not its portrait, becomes a UV skin texture: an image model recolours a template texture, and
     automatic gates check it at 2048, 4096 and 8192 px. 31 of the 100 pass every gate (prompted tones 1 to 9). Twelve of
-    them are rendered here, in two batches, in Blender Cycles, with subsurface scattering from 4K material maps, on one
-    generic FLAME 2023 Open head, so a render shows the identity's skin, not a 3D likeness of the portrait.</p>
+    them are rendered here, in two batches, in Blender Cycles with subsurface scattering, each with its own full set of
+    4K material maps (colour, subdermal colour, scattering weight, specular, roughness, micro relief) on its own
+    head shape from the <a href="#fit">head-shape fit</a> below. That shape is fitted to one photograph's face
+    landmarks with a neutral expression: an estimate, not a scan or a likeness.</p>
   <figure class="shot"><img src="docs/3d/tone_ladder.jpg" width="3700" height="1904" loading="lazy"
-    alt="Seven identities' skin on the same 3D head, lightest to darkest, front, three-quarter and close-up views">
-    <figcaption>Seven identities' skin on one head, ordered by the texture's cheek ITA (+69° to −55°). Head, eyes,
-    brow shape, lights and exposure are the same for every skin; only four skin maps change (colour, subdermal
-    colour, scattering weight, specular), with the ear's colour tile matched to each skin.</figcaption></figure>
+    alt="Seven identities' skin, each on its own fitted 3D head, lightest to darkest, front, three-quarter and close-up views">
+    <figcaption>Seven identities, each with its own skin maps on its own fitted head shape, ordered by the texture's
+    cheek ITA (+69° to −55°). Eyes, lashes, brow shape, lights and exposure are the same for every head, so
+    differences in brightness are the skin's.</figcaption></figure>
+  <figure class="shot" style="margin-top: 24px"><img src="docs/3d/fitted_vs_stock.jpg" width="2556" height="1126" loading="lazy"
+    alt="Four identities: the portrait, the render on the old stock head, and the render on the fitted head">
+    <figcaption>Portrait, the render on the single stock head used until 13 Nov 2026, and the render on the person's
+    fitted head: ID012, ID003, ID065 and ID089.</figcaption></figure>
   <div class="split3d" style="margin-top: 24px">
     <figure class="shot turn"><img src="docs/3d/ID012_turntable.gif" width="480" height="600" loading="lazy"
       alt="ID012's 3D head turning slowly"><figcaption>ID012, turntable</figcaption></figure>
@@ -141,14 +148,14 @@
       alt="ID068's 3D head in four lighting setups"><figcaption>Full head ID068 (prompted tone 7).</figcaption></figure>
     <figure class="shot"><img src="docs/3d/ID089_renders.jpg" width="2276" height="700" loading="lazy"
       alt="ID089's 3D head in four lighting setups"><figcaption>Full head ID089 (prompted tone 9). Both ran the
-      whole pipeline on their own texture; the head shape, eye and brow method, lights and exposure are the
-      hero's.</figcaption></figure>
+      whole pipeline on their own texture (own eyes, lashes and mesh relief too), each on its own fitted head; the
+      eye and brow method, lights and exposure are the hero's.</figcaption></figure>
   </div>
   <figure class="shot" style="margin-top: 24px"><img src="docs/3d/batch2/tone_ladder_front.jpg" width="2640" height="714" loading="lazy"
-    alt="Five more identities' skin on the same 3D head, front view, lightest to deepest">
-    <figcaption>Batch 2: ID003, ID024, ID034, ID050 and ID065 (prompted tones 1, 3, 4, 5 and 7) as ladder skins on the
-    same head, lights and exposures as the hero, filling tones 3 to 5. Their front renders read +4.8° to +6.1° lighter
-    than their textures. <a href="https://github.com/0vvI/synthetic-portraits-100/blob/main/docs/3d/batch2/README.md">Details,
+    alt="Five more identities' skin, each on its own fitted 3D head, front view, lightest to deepest">
+    <figcaption>Batch 2: ID003, ID024, ID034, ID050 and ID065 (prompted tones 1, 3, 4, 5 and 7) as ladder skins, each
+    on its own fitted head, with the hero's lights and exposures, filling tones 3 to 5. Their front renders read
+    +4.9° to +10.5° lighter than their textures. <a href="https://github.com/0vvI/synthetic-portraits-100/blob/main/docs/3d/batch2/README.md">Details,
     close-ups and numbers</a>.</figcaption></figure>
   <div class="split" style="margin-top: 28px">
     <figure class="shot chart"><img src="docs/3d/render_vs_texture_ita.png" width="1840" height="928" loading="lazy"
@@ -158,9 +165,11 @@
         ITA is −0.96 for the texture and −0.83 for the portrait. Unlit texture against lit photograph: compare the
         orderings, not the levels.</p>
       <p><b>The render keeps the order but reads lighter.</b> The seven renders keep their textures' order exactly
-        (ρ 1.0) but measure lighter than the texture: +5° to +8° for the four lightest, +11.8°, +15.1° and +26.9° for
-        ID068, ID077 and ID089. The five batch 2 skins (tones 1, 3, 4, 5 and 7, not in this chart) also keep their
-        order and read +4.8° to +6.1° lighter than their textures.</p>
+        (ρ 1.0) but measure lighter than the texture: +6.7° to +12.2° for the four lightest, +15.1°, +16.0° and +29.8°
+        for ID068, ID077 and ID089. The five batch 2 skins (tones 1, 3, 4, 5 and 7, not in this chart) also keep their
+        order and read +4.9° to +10.5° lighter than their textures.</p>
+      <p><b>The head shape moves the measurement too.</b> With the same skin maps, ID012's front render reads 53.3° on
+        the old stock head and 56.9° on its fitted head, whose fuller cheeks face the top light more.</p>
       <p class="muted">Render ITA from each front render, with the same YuNet cheek patches as the portraits. The
         texture and head pipeline is not part of this repository.</p>
     </div>
@@ -169,8 +178,8 @@
 <section class="section" id="fit">
   <h2>Head-shape fit</h2>
   <p>A statistical 3D head model (FLAME 2023 Open) and a camera pose are fitted to the 468 face landmarks that MediaPipe
-    finds in each portrait. Every stage is scored on landmarks the fit never saw. This is a separate analysis: the
-    renders above still use one generic head.</p>
+    finds in each portrait. Every stage is scored on landmarks the fit never saw. The 3D renders above use the
+    fitted shapes, with a neutral expression.</p>
   <figure class="shot"><img src="docs/fit/overlay.jpg" width="1812" height="1548" loading="lazy"
     alt="Ten portraits, each shown plain, with the fitted 3D head drawn over it as a wireframe, and as a shaded head alone">
     <figcaption>Ten portraits, one per prompted tone. Left: the portrait. Middle: the fitted head drawn over it. Right:

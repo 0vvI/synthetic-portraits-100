@@ -296,23 +296,11 @@ training data. See Google's [Terms of Service](https://policies.google.com/terms
 Google says Gemini images carry an invisible SynthID watermark; the originals are byte-identical to the
 downloads.
 
-## Who wrote what
-
-Design, prompts, generation runs and measurement: Claude Code sessions directed by Ao Zuo, 18–20 Sep 2026.
-This repository, the measurement fix and the public write-up: the same way, 4–5 Nov 2026.
-The head-shape fit (`fit/`): the same way, 11–12 Nov 2026. The numpy solver and the C++ core were written
-separately from one contract and compared. The renders on fitted head shapes and the ladder skins' own roughness
-and relief maps: the same way, 13 Nov 2026. The portraits' measurements and the first 3D section were checked by a
-second model. For the fit, a second model recomputed the tables from the per-portrait files; the fit's evaluation
-code and write-up have not had an independent review yet. The 13 Nov changes were checked by a separate Claude
-agent that had not written them (every tone number recomputed from the CSVs, every map claim against the render
-configuration, and the shape transfer code read); its two findings were fixed before publishing.
-
 ## Licence
 
 - Code (`code/`, `fit/` except `fit/embedding/third_party/` and `fit/results/`, `index.html`): MIT, see `LICENSE`.
 - Images, labels and prompts: [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/), see
-  `LICENSE-DATA`. Credit: "Synthetic Portraits 100, Ao Zuo, 2026".
+  `LICENSE-DATA`. Credit: "Synthetic Portraits 100, AoZuo, 2026".
 - `code/face_detection_yunet_2023mar.onnx` is from [opencv_zoo](https://github.com/opencv/opencv_zoo),
   MIT licence, copyright (c) 2020 Shiqi Yu (`code/YUNET_LICENSE`).
 - The 3D renders and the head-shape fit use the FLAME 2023 Open head model (Li et al., Max Planck Institute for

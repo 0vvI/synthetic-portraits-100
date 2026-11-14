@@ -138,7 +138,7 @@ micro normal map read as bump.
 | ear colour | ID012's ear tile matched to the skin | the identity's own |
 | brow shape | a stock mask | a stock mask |
 
-### The hero: ID012
+### Example: ID012
 
 ![ID012 turntable](docs/3d/ID012_turntable.gif)
 

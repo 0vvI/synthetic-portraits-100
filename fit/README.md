@@ -232,7 +232,7 @@ MediaPipe model (Apache-2.0, downloaded separately); their outputs are already i
 - MediaPipe Face Landmarker and its canonical face mesh (`embedding/third_party/`), Google, Apache-2.0.
 - [Eigen](https://eigen.tuxfamily.org) (MPL-2.0) and [pybind11](https://github.com/pybind/pybind11) (BSD-3-Clause)
   are build dependencies, not copied here.
-- Designed and directed by Ao Zuo; written with Claude Code sessions, 11–12 Nov 2026. The C++ core and the numpy
+- Written with Claude Code sessions, 11–12 Nov 2026. The C++ core and the numpy
   reference were written separately from `SPEC.md` and then compared. A second model recomputed the tables on
   this page from the per-portrait files in `results/`; the evaluation code and this text have not had an
   independent review yet.

@@ -68,7 +68,7 @@ the portrait whose measured ITA is closest to that tone's median.*
 | `code/` | design sheet, prompts, harvest, measurement, figures and gallery data |
 | `index.html` | the browsable gallery, served at the link above |
 | `labels/texture_ita.csv` | for the 31 identities with a gated skin texture: the texture's and the portrait's cheek ITA |
-| `docs/3d/` | 3D renders: the ID012 hero, the seven-skin tone ladder, full heads ID068 and ID089, two tone charts; `batch2/` adds five more ladder skins (tones 1, 3, 4, 5, 7) |
+| `docs/3d/` | 3D renders: the ID012 example, the seven-skin tone ladder, full heads ID068 and ID089, two tone charts; `batch2/` adds five more ladder skins (tones 1, 3, 4, 5, 7) |
 | `fit/` | the head-shape fit: the contract (`SPEC.md`), the numpy and C++ solvers, tests, the landmarks, the fitted coefficients and every evaluation table; its own [README](fit/README.md) |
 | `docs/fit/` | the fit's figures |
 
@@ -103,7 +103,7 @@ Counts came out exactly as designed: 10 per tone, 20 per age bin, 50 women and 5
 
 *Seven identities, each with its own skin maps on its own fitted head shape, ordered by the texture's measured
 cheek ITA (+69° to −55°): ID004, ID012, ID056, ID074, ID068, ID077, ID089. Eyes, lashes, brow shape and lights are
-the same for every head, and every shot uses the hero's exposure, so differences in brightness are the skin's.*
+the same for every head, and every shot uses ID012's exposure, so differences in brightness are the skin's.*
 
 Each skin texture is made from the identity's text description, not from its portrait: an image model recolours
 a template UV skin texture toward the description, and automatic gates check every result at 2048, 4096 and
@@ -159,8 +159,8 @@ three-quarter, Rembrandt and backlit light, then cheek, eye and lip close-ups.*
 tone 9: an 80-year-old woman of Afro-Caribbean heritage, "dark brown skin").*
 
 These two went through the whole pipeline on their own texture, so beyond their own material maps they have their
-own eyes, lashes, ear tiles and mesh relief, each on its own fitted head shape. Shared with the hero: the eye and
-brow method (the brow shape is a stock mask, not the identity's), the lights, and the hero's exposure for each
+own eyes, lashes, ear tiles and mesh relief, each on its own fitted head shape. Shared with ID012: the eye and
+brow method (the brow shape is a stock mask, not the identity's), the lights, and ID012's exposure for each
 shot.
 
 ### Batch 2: filling tones 3–5
@@ -168,7 +168,7 @@ shot.
 ![five more identities' skin, each on its own fitted head](docs/3d/batch2/tone_ladder_front.jpg)
 
 *ID003, ID024, ID034, ID050 and ID065 (prompted tones 1, 3, 4, 5 and 7) rendered as ladder skins, each on its own
-fitted head, with the hero's lights and exposures. Their front renders read +4.8° to +10.5° lighter than their
+fitted head, with ID012's lights and exposures. Their front renders read +4.8° to +10.5° lighter than their
 textures. Details, close-ups and numbers: [`docs/3d/batch2/`](docs/3d/batch2/README.md).*
 
 ### Does the rendered skin keep the tone?
@@ -300,7 +300,7 @@ downloads.
 
 - Code (`code/`, `fit/` except `fit/embedding/third_party/` and `fit/results/`, `index.html`): MIT, see `LICENSE`.
 - Images, labels and prompts: [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/), see
-  `LICENSE-DATA`. Credit: "Synthetic Portraits 100, AoZuo, 2026".
+  `LICENSE-DATA`. Credit: "Synthetic Portraits 100, 2026, github.com/0vvI/synthetic-portraits-100".
 - `code/face_detection_yunet_2023mar.onnx` is from [opencv_zoo](https://github.com/opencv/opencv_zoo),
   MIT licence, copyright (c) 2020 Shiqi Yu (`code/YUNET_LICENSE`).
 - The 3D renders and the head-shape fit use the FLAME 2023 Open head model (Li et al., Max Planck Institute for

@@ -1,6 +1,6 @@
 # Notes for Claude sessions working on this repository
 
-This is Ao Zuo's portfolio project. Every number in it must be correct. Two kinds of session work on it:
+This is a portfolio project. Every number in it must be correct. Two kinds of session work on it:
 
 - **The local session** on Ao's Mac. It has the full-size portraits, the private texture and head pipeline,
   Blender, and the 31 skin textures. It produces everything under `docs/3d/`, plus `labels/texture_ita.csv`.
@@ -19,7 +19,8 @@ This is Ao Zuo's portfolio project. Every number in it must be correct. Two kind
 | `images/`, `labels/*` except texture_ita.csv, `prompts/` | frozen data | never edit |
 
 Work on your own branch, not `main`. Before editing, merge the latest local-session branch (named in the brief
-you were given, for example `3d-ladder`). Commit as `Ao Zuo <316852364+0vvI@users.noreply.github.com>`.
+you were given, for example `3d-ladder`). Commit with the author name and no-reply address every commit on `main` already uses
+(`git log -1 --format='%an <%ae>' main`).
 
 ## Hard rules
 
@@ -38,7 +39,7 @@ you were given, for example `3d-ladder`). Commit as `Ao Zuo <316852364+0vvI@user
     lighting. Since 13 Nov every ladder skin uses its own colour, subdermal colour, scattering weight, specular,
     roughness, micro height and micro normal (all 4K); the scattering radius and micro-detail weight are one map
     for every identity; the mesh relief, eyes, lashes and ear relief are ID012's; the ear's colour tile is matched
-    to each skin. The exposure is locked to the hero's for every skin, so brightness differences are the skin's.
+    to each skin. The exposure is locked to ID012's for every skin, so brightness differences are the skin's.
   - There is no separate displacement map: relief at the scale of the render mesh (median edge 0.54 mm; up to
     0.35 mm deep) is baked into the mesh; finer relief is the micro height and normal maps, read as bump.
   - Texture tone and portrait tone are different measurements: unlit albedo against a studio-lit JPEG. Compare
@@ -76,8 +77,8 @@ you were given, for example `3d-ladder`). Commit as `Ao Zuo <316852364+0vvI@user
   that identity's texture, so its identity-dependent skin maps are its own: colour, subdermal colour, scattering
   weight, specular, micro height and normal, roughness, and the ear tiles, plus its own eyes, lashes and mesh
   relief. The scattering-radius and micro-detail-weight maps are generic, the same on every head. Each sits on its
-  own fitted head shape. Shared with the hero: the eye and brow method (the brow shape is a stock mask, not the
-  identity's), the lights, and the hero's exposure for each shot. They have no turntable. Their cheek ITA is not
+  own fitted head shape. Shared with ID012: the eye and brow method (the brow shape is a stock mask, not the
+  identity's), the lights, and ID012's exposure for each shot. They have no turntable. Their cheek ITA is not
   in any repo file, so don't quote one.
 - `docs/3d/texture_vs_portrait_ita.png` plots `labels/texture_ita.csv` (texture and portrait ITA against
   prompted tone, the 31 textures).

@@ -1,6 +1,6 @@
 Images (images/, docs/), labels (labels/) and prompts (prompts/) of Synthetic Portraits 100
 
-Copyright (c) 2026 Ao Zuo, to the extent that copyright subsists in this material.
+Copyright (c) 2026 the copyright holder named in LICENSE, to the extent that copyright subsists in this material.
 
 Licensed under the Creative Commons Attribution-NonCommercial 4.0 International licence (CC BY-NC 4.0).
 You may share and adapt the material for non-commercial purposes, provided you give appropriate credit,
@@ -9,11 +9,11 @@ link to the licence and indicate if changes were made.
 Summary:   https://creativecommons.org/licenses/by-nc/4.0/
 Full text: https://creativecommons.org/licenses/by-nc/4.0/legalcode
 
-Suggested credit: "Synthetic Portraits 100, Ao Zuo, 2026, CC BY-NC 4.0"
+Suggested credit: "Synthetic Portraits 100, 2026, github.com/0vvI/synthetic-portraits-100, CC BY-NC 4.0"
 
 About the portraits: they were generated with Google Gemini (Nano Banana 2) and show people who do not exist.
 In some jurisdictions purely AI-generated images are not protected by copyright, and this licence grants only
-the rights Ao Zuo holds. Google states that it does not claim ownership of generated content. Google's terms
+the rights the copyright holder holds. Google states that it does not claim ownership of generated content. Google's terms
 list "using AI-generated content from our services to develop machine learning models or related AI
 technology" as abuse, so the images are offered for viewing and evaluation, not as training data. Use remains
 subject to Google's Terms of Service and Generative AI Prohibited Use Policy.

@@ -14,10 +14,10 @@ ID050, ID065. Rows: front (H01), three-quarter (H03), cheek close-up (C01).*
 
 These are ladder heads, like the seven in the first ladder. Each sits on its own head shape from the head-shape
 fit (since 13 Nov 2026; shape only, neutral expression). The eyes, lashes, brow shape, mesh relief, lights and
-per-shot exposure are the hero's (ID012e). The skin maps are the identity's own: colour, subdermal colour,
+per-shot exposure are ID012's (ID012e). The skin maps are the identity's own: colour, subdermal colour,
 scattering weight, specular, roughness, micro height and micro normal, plus the ear's colour tile matched to each
 skin (scattering radius and micro-detail weight are one map for every identity). Each head has the same seven
-shots as the hero: four lighting setups (H01–H04) and three close-ups (C01 cheek, C02 eye, C03 lips). The
+shots as ID012: four lighting setups (H01–H04) and three close-ups (C01 cheek, C02 eye, C03 lips). The
 renders are Blender Cycles at 128 samples, 1200×1500 (heads) and 1024×1024 (close-ups); see `renders.csv`.
 
 | Head | Prompted tone | Description (from `labels/identities_v0.csv`) | Portrait ITA | Texture ITA | Render ITA |
